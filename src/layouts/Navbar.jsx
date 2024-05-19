@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
-import CustomButton from "../components/Button";
+import Button from "@mui/material/Button";
 function Navbar() {
   return (
     <div>
@@ -62,8 +62,8 @@ function Navbar() {
             </div>
 
             <div className="flex items-center gap-4">
-              <CustomButton text="Login" variant="outlined" />
-              <CustomButton text="Register" variant="contained" />
+              <Button variant="contained">Contained</Button>
+              <Button variant="outlined">Outlined</Button>
             </div>
           </div>
         </div>
