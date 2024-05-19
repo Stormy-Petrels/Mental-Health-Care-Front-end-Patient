@@ -62,8 +62,8 @@ function Navbar() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Button variant="contained">Contained</Button>
-              <Button variant="outlined">Outlined</Button>
+              <Button variant="contained"> <Link to="/signin">  Sign in </Link></Button>
+              <Button variant="outlined"><Link to="/signup">  Sign up </Link></Button>
             </div>
           </div>
         </div>

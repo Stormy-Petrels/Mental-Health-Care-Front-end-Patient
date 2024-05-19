@@ -8,6 +8,8 @@ import Home from "../pages/Home";
 // import Search from "../users/Search";
 // import User from "../users/User";
 import DoctorDetail from "./../pages/DoctorDetail";
+import Signin from "../pages/Signin";
+import Signup from "../pages/Signup";
 const MainLayout = () => {
   return (
     <div className="container">
@@ -19,6 +21,8 @@ const MainLayout = () => {
         </Route>
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/signin" component={Signin} />
+        <Route exact path="/signup" component={Signup} />
         <Route path="/*" component={NotFound}></Route>
       </Switch>
     </div>
