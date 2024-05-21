@@ -1,34 +1,49 @@
-
 body {
-    font-family: "Roboto", sans-serif;
-  }
-  body {
-    background-color: #ffffff; 
-  } 
+  font-family: "Roboto", sans-serif;
+}
+body {
+  background-color: #ffffff;
+}
 
-  .text-color {
-    color: #000000; 
-  }
-  
-  .highlight-text-color {
-    color: #1cbbd0; 
-  }
-  
-  .text-size-large {
-    font-size: 55px;
-  }
-  
-  .text-size-medium {
-    font-size: 42px;
-  }
-  
-  .text-size-small {
-    font-size: 20px; 
-  }
-  
+.container {
+  margin: 0 auto;
+}
 
-  .button {
-    color: #ffffff; 
-    background-color: #e61f57; 
-  }
+.text-color {
+  color: #000000;
+}
 
+.highlight-text-color {
+  color: #1cbbd0;
+}
+
+.text-size-large {
+  font-size: 55px;
+}
+
+.text-size-medium {
+  font-size: 42px;
+}
+
+.text-size-small {
+  font-size: 20px;
+}
+
+.button {
+  color: #ffffff;
+  background-color: #e61f57;
+}
+
+.listDoctors {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  row-gap: 30px;
+  column-gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:hover {
+  box-shadow: rgb(156, 158, 160) 1px 2px;
+  transform: scale(1.03);
+}
