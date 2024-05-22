@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import Button from "@mui/material/Button";
@@ -62,8 +61,12 @@ function Navbar() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Button variant="contained"> <Link to="/signin">  Sign in </Link></Button>
-              <Button variant="outlined"><Link to="/signup">  Sign up </Link></Button>
+              <Button variant="contained">
+                <Link to="/signin">Sign in</Link>
+              </Button>
+              <Button variant="outlined">
+                <Link to="/signup">Sign up</Link>
+              </Button>
             </div>
           </div>
         </div>
