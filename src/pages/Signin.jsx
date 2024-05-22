@@ -11,11 +11,20 @@ export default function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
     const [message, setMessage] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setMessage("");
+
+        if (!email || !password) {
+            setEmailError(!email);
+            setPasswordError(!password);
+            setMessage("Please enter email and password");
+            return;
+        }
 
         try {
             const response = await axios.post("http://localhost:8000/api/sign-in", {
@@ -80,6 +89,8 @@ export default function Signin() {
                                     autoFocus
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    error={emailError}
+                                    helperText={emailError ? "Please enter a valid email address" : ""}
                                 />
                                 <TextField
                                     margin="normal"
@@ -92,6 +103,8 @@ export default function Signin() {
                                     autoComplete="current-password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    error={passwordError}
+                                    helperText={passwordError ? "Please enter a valid password" : ""}
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
@@ -122,7 +135,7 @@ export default function Signin() {
                                         </Link>
                                     </Grid>
                                     <Grid item>
-                                        <Link href="#" variant="body2">
+                                        <Link href="/signup" variant="body2">
                                             {"Don't have an account? Sign Up"}
                                         </Link>
                                     </Grid>
