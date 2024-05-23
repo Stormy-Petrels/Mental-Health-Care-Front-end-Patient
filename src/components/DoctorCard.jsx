@@ -6,11 +6,21 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ImageDefault from '../assets/ImageDefaultDoctor.jpg';
+import ReactPaginate from 'react-paginate';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useState, useEffect } from 'react';
 
-const doctorCard = ({props}) =>
+const DoctorCard = ({doctors}) =>
 {
-    const doctors = props;
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
 
+    if (doctors.length === 0) {var check  = false;} else {check  = true;}
+
+    useEffect(() => {
+        setTotalPage(Math.ceil(doctors.length / 6))
+    }, [doctors]);
     const CheckImage = (UrlImage) => {
         try {
             return require("/src/assets/" + UrlImage );
@@ -19,10 +29,18 @@ const doctorCard = ({props}) =>
             return ImageDefault;
         }
     } 
+
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected + 1);
+    };
+
+    var indexLast = currentPage * 6;
+    var indexFirst = indexLast - 6;
+    var currentPageData = doctors.slice(indexFirst, indexLast);
     
     return(
         <div className='listDoctors'>
-            {doctors.map((doctor) => (
+            {currentPageData.map((doctor) => (
                 <Card sx={{ maxWidth: 200 }} key={doctor.id} className='card'>
                     <CardMedia
                         component="img"
@@ -44,8 +62,27 @@ const doctorCard = ({props}) =>
                     </CardActions>
                 </Card>
             ))}
+            {check &&
+            <div className='paginate'>
+                <ReactPaginate
+                    activeClassName={'item active '}
+                    breakClassName={'item break-me '}
+                    breakLabel={'...'}
+                    containerClassName={'pagination'}
+                    disabledClassName={'disabled-page'}
+                    marginPagesDisplayed={2}
+                    nextClassName={"item next "}
+                    nextLabel={<ArrowForwardIosIcon style={{ fontSize: 18, width: 150 }} />}
+                    onPageChange={handlePageClick}
+                    pageCount={totalPage}
+                    pageClassName={'item pagination-page '}
+                    pageRangeDisplayed={2}
+                    previousClassName={"item previous"}
+                    previousLabel={<ArrowBackIosNewIcon style={{ fontSize: 18, width: 150 }} />}
+                />
+            </div>}
         </div>
     )
 }
 
-export default doctorCard;
+export default DoctorCard;

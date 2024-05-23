@@ -24,7 +24,7 @@ function Doctors() {
   
   return (
     <>
-      <DoctorCard props={doctors}/>
+      <DoctorCard doctors={doctors}/>
     </>
   )
 }
