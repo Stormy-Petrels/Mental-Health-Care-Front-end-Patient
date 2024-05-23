@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import logo from "../assets/SigninSignup.jpg";
-import {
-    Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment
+import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -38,6 +37,11 @@ export default function Signin() {
                 if (errors) {
                     setEmailError(errors.email ? errors.email.join(", ") : "");
                     setPasswordError(errors.password ? errors.password.join(", ") : "");
+                }
+                if (message === "account has been locked") {
+                    setMessage("Your account has been locked. Please contact support.");
+                } else if (message === "User not found or invalid credentials") {
+                    setMessage("User not found or invalid credentials.");
                 }
             } else {
                 setMessage("An error occurred. Please try again.");
