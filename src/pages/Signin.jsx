@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import logo from "../assets/Signin.jpg";
+import logo from "../assets/SigninSignup.jpg";
 import {
     Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment
 } from "@mui/material";
@@ -11,20 +11,15 @@ export default function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [message, setMessage] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setMessage("");
-
-        if (!email || !password) {
-            setEmailError(!email);
-            setPasswordError(!password);
-            setMessage("Please enter email and password");
-            return;
-        }
+        setEmailError("");
+        setPasswordError("");
 
         try {
             const response = await axios.post("http://localhost:8000/api/sign-in", {
@@ -32,10 +27,21 @@ export default function Signin() {
                 password,
             });
 
-            setMessage("Sign in successfully!");
-            console.log(response.data);
+            if (response.data.payload) {
+                setMessage("Sign in successfully!");
+                console.log(response.data);
+            }
         } catch (error) {
-            setMessage("Error, please re-enter email or password");
+            if (error.response) {
+                const { errors, message } = error.response.data;
+                setMessage(message || "Error, please re-enter email or password.");
+                if (errors) {
+                    setEmailError(errors.email ? errors.email.join(", ") : "");
+                    setPasswordError(errors.password ? errors.password.join(", ") : "");
+                }
+            } else {
+                setMessage("An error occurred. Please try again.");
+            }
         }
     };
 
@@ -89,8 +95,8 @@ export default function Signin() {
                                     autoFocus
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    error={emailError}
-                                    helperText={emailError ? "Please enter a valid email address" : ""}
+                                    error={!!emailError}
+                                    helperText={emailError}
                                 />
                                 <TextField
                                     margin="normal"
@@ -103,8 +109,8 @@ export default function Signin() {
                                     autoComplete="current-password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    error={passwordError}
-                                    helperText={passwordError ? "Please enter a valid password" : ""}
+                                    error={!!passwordError}
+                                    helperText={passwordError}
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
