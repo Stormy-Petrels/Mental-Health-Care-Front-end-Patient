@@ -19,7 +19,6 @@ const MainLayout = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/doctors" component={Doctors}/>
         <Route exact path="/doctor/:doctorId" component={DoctorDetail} />
-        
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/signin" component={Signin} />
