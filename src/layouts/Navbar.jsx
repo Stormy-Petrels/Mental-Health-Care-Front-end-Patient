@@ -8,10 +8,8 @@ function Navbar() {
   const history = useHistory();
 
   const handleSignOut = () => {
-    // Xử lý đăng xuất ở đây, ví dụ: clear token, set isLoggedIn về false
     setIsLoggedIn(false);
-    // Chuyển hướng về trang đăng nhập hoặc trang chính
-    history.push("/signin"); // Thay đổi đường dẫn tới trang đăng nhập của bạn nếu cần
+    history.push("/signin"); 
   };
 
   return (
