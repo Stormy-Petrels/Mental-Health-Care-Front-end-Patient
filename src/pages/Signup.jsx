@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import logo from "../assets/SigninSignup.jpg";
 import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment
 } from "@mui/material";
@@ -19,6 +20,7 @@ export default function Signup() {
     const [phoneError, setPhoneError] = useState("");
     const [addressError, setAddressError] = useState("");
     const [message, setMessage] = useState("");
+    const history = useHistory();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -41,6 +43,7 @@ export default function Signup() {
             if (response.data.payload) {
                 setMessage("Sign up successfully!");
                 console.log(response.data);
+                history.push("/signin"); 
             }
         } catch (error) {
             if (error.response) {
