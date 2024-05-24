@@ -11,16 +11,19 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState, useEffect } from 'react';
 
-const DoctorCard = ({doctors}) =>
+const DoctorCard = ({doctors, nameMajor}) =>
 {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
 
-    if (doctors.length === 0) {var check  = false;} else {check  = true;}
-
     useEffect(() => {
         setTotalPage(Math.ceil(doctors.length / 6))
-    }, [doctors]);
+    },[doctors]);
+
+    var indexLast = currentPage + 1 * 6;
+    var indexFirst = indexLast - 6;
+    var currentPageData = doctors.slice(indexFirst, indexLast);
+
     const CheckImage = (UrlImage) => {
         try {
             return require("/src/assets/" + UrlImage );
@@ -28,20 +31,18 @@ const DoctorCard = ({doctors}) =>
         catch (error) {
             return ImageDefault;
         }
-    } 
-
+    }
+    
     const handlePageClick = (event) => {
-        setCurrentPage(event.selected + 1);
+        setCurrentPage(event.selected);
     };
 
-    var indexLast = currentPage * 6;
-    var indexFirst = indexLast - 6;
-    var currentPageData = doctors.slice(indexFirst, indexLast);
+    console.log(nameMajor);
     
     return(
         <div className='listDoctors'>
-            {currentPageData.map((doctor) => (
-                <Card sx={{ maxWidth: 200 }} key={doctor.id} className='card'>
+            {currentPageData.map((doctor) => ( 
+                <Card className='card' sx={{ maxWidth: 200 }} key={doctor.id}>
                     <CardMedia
                         component="img"
                         alt={doctor.id}
@@ -57,13 +58,11 @@ const DoctorCard = ({doctors}) =>
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small">Book</Button>
-                        {/* <Button size="small">Learn More</Button> */}
+                        <Button className='buttonBook' size="small">Book</Button>
                     </CardActions>
                 </Card>
             ))}
-            {check &&
-            <div className='paginate'>
+        <div className='paginate'>
                 <ReactPaginate
                     activeClassName={'item active '}
                     breakClassName={'item break-me '}
@@ -80,7 +79,7 @@ const DoctorCard = ({doctors}) =>
                     previousClassName={"item previous"}
                     previousLabel={<ArrowBackIosNewIcon style={{ fontSize: 18, width: 150 }} />}
                 />
-            </div>}
+            </div>
         </div>
     )
 }
