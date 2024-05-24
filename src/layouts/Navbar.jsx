@@ -39,26 +39,18 @@ function Navbar() {
             <div className="hidden md:block">
               <nav aria-label="Global">
                 <ul className="flex items-center gap-6 text-sm">
-                  <Link to="/">
-                    <a className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
-                      Home
-                    </a>
+                  <Link to="/" className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
+                    Home
                   </Link>
 
-                  <Link to="/doctors">
-                    <a className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
-                      Doctors
-                    </a>
+                  <Link to="/doctors" className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
+                    Doctors
                   </Link>
-                  <Link to="/about">
-                    <a className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
-                      About
-                    </a>
+                  <Link to="/about" className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
+                    About
                   </Link>
-                  <Link to="/contact">
-                    <a className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
-                      Contact
-                    </a>
+                  <Link to="/contact" className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
+                    Contact
                   </Link>
                 </ul>
               </nav>
