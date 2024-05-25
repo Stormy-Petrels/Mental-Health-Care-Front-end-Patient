@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import logo from "../assets/SigninSignup.jpg";
-import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment
-} from "@mui/material";
+import { useHistory } from "react-router-dom";
+import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useHistory } from "react-router-dom";
+import logo from "../assets/SigninSignup.jpg";
 
 export default function Signin() {
     const [email, setEmail] = useState("");
@@ -27,10 +26,11 @@ export default function Signin() {
                 email,
                 password,
             });
-//chuyển sang home page 
+
             if (response.data.payload) {
                 setMessage("Sign in successfully!");
-                console.log(response.data);
+                localStorage.setItem("authToken", response.data.payload.token);
+                localStorage.setItem("user", JSON.stringify(response.data.payload));
                 history.push("/"); 
             }
         } catch (error) {
@@ -139,7 +139,7 @@ export default function Signin() {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                 >
-                               Sign in
+                                    Sign in
                                 </Button>
                                 <Grid container>
                                     <Grid item xs>

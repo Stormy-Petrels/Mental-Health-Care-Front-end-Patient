@@ -54,7 +54,7 @@ function Home() {
         </div>
       </section>
 
-      <section class="mx-auto max-w-screen-2xl px-6 sm:px-6 lg:px-20">
+      <section className="mx-auto max-w-screen-2xl px-6 sm:px-6 lg:px-20">
         <h1 className="self-start mt-32 text-6xl font-extrabold text-black md:mt-10 md:text-4xl">
           Our Team
         </h1>

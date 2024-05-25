@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import logo from "../assets/SigninSignup.jpg";
-import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment
-} from "@mui/material";
+import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import logo from "../assets/SigninSignup.jpg";
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -42,8 +41,9 @@ export default function Signup() {
 
             if (response.data.payload) {
                 setMessage("Sign up successfully!");
-                console.log(response.data);
-                history.push("/signin"); 
+                localStorage.setItem("authToken", response.data.payload.token);
+                localStorage.setItem("user", JSON.stringify(response.data.payload.user));
+                history.push("/"); 
             }
         } catch (error) {
             if (error.response) {
@@ -87,7 +87,7 @@ export default function Signup() {
                                 t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
                         }}
                     >
-                        <img src={logo} alt="Logo" style={{ width: "1000%", height: "100%", objectFit: "cover" }} />
+                        <img src={logo} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </Grid>
                     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                         <Box
