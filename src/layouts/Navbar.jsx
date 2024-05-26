@@ -27,13 +27,13 @@ function Navbar() {
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
-              <a className="flex items-center justify-center text-teal-600" href="#">
+              <div className="flex items-center justify-center text-cyan-500">
                 <span className="sr-only">Home</span>
                 <Logo />
                 <p className="text-cyan-500 ml-2 text-2xl">
                   Mental Health Care
                 </p>
-              </a>
+              </div>
             </div>
 
             <div className="hidden md:block">
@@ -42,7 +42,6 @@ function Navbar() {
                   <Link to="/" className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
                     Home
                   </Link>
-
                   <Link to="/doctors" className="text-size-small text-stone-500 transition hover:text-gray-500/75" href="#">
                     Doctors
                   </Link>

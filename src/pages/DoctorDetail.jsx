@@ -1,36 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import DoctorAbout from "./DoctorAbout";
+import { Link, useParams } from "react-router-dom";
 import { formateDate } from "../utils/formateDate";
-import SlidePanel from "./SlidePanel";
+import { Button } from "@mui/material";
 
 const DoctorDetail = () => {
   const { doctorId } = useParams();
   const [doctor, setDoctor] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState("about");
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     axios
       .get(`http://127.0.0.1:8000/api/detail/${doctorId}`)
       .then((response) => {
         setDoctor(response.data.payload);
-        setLoading(false);
       })
       .catch((error) => {
         console.error("There was an error fetching the doctor!", error);
-        setLoading(false);
       });
   }, [doctorId]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
-      </div>
-    );
-  }
 
   if (!doctor) {
     return (
@@ -42,7 +33,7 @@ const DoctorDetail = () => {
 
   return (
     <section>
-      <div className="max-w-[1170px] py-20 px-5 mx-auto">
+      <div className="max-w-[1170px] pt-28 pb-20 px-5 mx-auto">
         <div className="grid md:grid-cols-3 gap-[50px]">
           <div className="md:col-span-2">
             <div className="flex items-center gap-5">
@@ -58,8 +49,6 @@ const DoctorDetail = () => {
                   {doctor.fullName}
                 </h3>
                 <p className="text-base lg:max-w-[390px]">
-                  {doctor.description}
-                  <br />
                   {doctor.phone}
                   <br />
                   {doctor.address}
@@ -88,11 +77,21 @@ const DoctorDetail = () => {
                 </li>
               </ul>
             </div>
-
-            <DoctorAbout />
+            <div>
+              <h3 className="text-lg mt-2 font-extrabold">
+                Description
+              </h3>
+              <p className="text-base mt-2">
+                {doctor.description}
+              </p>
+            </div>
           </div>
           <div className="md:col-span-1">
-            <SlidePanel />
+            <div className="scroll-to-top" style={{ position: 'fixed', top: '20%', right: '10%', transform: 'translateX(-50%)' }}>
+              <Button onClick={handleScrollToTop} variant="contained">
+                <Link to="/">Book Appoinment</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
