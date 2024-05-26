@@ -52,6 +52,5 @@ export default function Filter(props) {
         ))}
       </Paper>
     </div>
-    
   );
 }

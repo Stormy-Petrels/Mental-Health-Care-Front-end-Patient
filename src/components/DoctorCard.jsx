@@ -19,7 +19,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
     useEffect(() => {
         const filteredDoctors = doctors.filter((doctor) => nameMajor === doctor.major);
         setNewDataDoctors(filteredDoctors);
-        setCurrentPage(0);  // Reset to the first page when doctors or nameMajor changes
+        setCurrentPage(0);
     }, [doctors, nameMajor]);
 
     useEffect(() => {

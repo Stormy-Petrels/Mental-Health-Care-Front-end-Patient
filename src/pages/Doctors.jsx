@@ -11,7 +11,6 @@ function Doctors() {
 
   const handleChooseFilter = (nameMajor) => {
     setNameMajor(() => nameMajor);
-    // console.log(nameMajor);
   }
 
   useEffect(()=> {
