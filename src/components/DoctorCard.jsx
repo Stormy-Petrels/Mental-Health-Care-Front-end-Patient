@@ -23,7 +23,6 @@ const DoctorCard = ({ doctors, nameMajor }) => {
     }, [doctors, nameMajor]);
 
     useEffect(() => {
-        const totalPage = Math.ceil(newDataDoctors.length / 6);
         const indexLast = (currentPage + 1) * 6;
         const indexFirst = indexLast - 6;
         setCurrentDataDoctors(newDataDoctors.slice(indexFirst, indexLast));
@@ -73,13 +72,13 @@ const DoctorCard = ({ doctors, nameMajor }) => {
                     disabledClassName={'disabled-page'}
                     marginPagesDisplayed={2}
                     nextClassName={"item next "}
-                    nextLabel={<ArrowForwardIosIcon style={{ fontSize: 18, width: 150 }} />}
+                    nextLabel={currentDataDoctors.length === 0 ? "" :<ArrowForwardIosIcon style={{ fontSize: 18, width: 150 }} />}
                     onPageChange={handlePageClick}
                     pageCount={Math.ceil(newDataDoctors.length / 6)}
                     pageClassName={'item pagination-page '}
                     pageRangeDisplayed={2}
                     previousClassName={"item previous"}
-                    previousLabel={<ArrowBackIosNewIcon style={{ fontSize: 18, width: 150 }} />}
+                    previousLabel={currentDataDoctors.length === 0 ? "" : <ArrowBackIosNewIcon style={{ fontSize: 18, width: 150 }} />}
                 />
             </div>
         </div>

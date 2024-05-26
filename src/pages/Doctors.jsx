@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import DoctorCard from '../components/DoctorCard';
 import axios from "axios";
 import Filter from '../components/Filter';
+import Skeleton from '../components/SkeletonListDoctor.jsx';
 
 
 function Doctors() {
 
   const [doctors, setDoctors] = useState([]);
   const [nameMajor, setNameMajor] = useState("Bác sĩ");
+  const [skeleton, setSkeleton] = useState(true);
 
   const handleChooseFilter = (nameMajor) => {
     setNameMajor(() => nameMajor);
@@ -19,6 +21,12 @@ function Doctors() {
         try {
           const response = await axios.get(`http://127.0.0.1:8000/api/Patient/viewListDoctors`);
           setDoctors(() => (response.data.payload));
+
+          const timer = setTimeout(() => {
+            setSkeleton(false);
+          }, 500);
+      
+          return () => clearTimeout(timer);
         }
         catch (error) {
           console.log(error);
@@ -31,8 +39,8 @@ function Doctors() {
 
   return (
     <div className='childrenContainer'>
-      <Filter handleChooseFilter={handleChooseFilter}/> 
-      <DoctorCard doctors={doctors} nameMajor={nameMajor}/>
+      {skeleton === true ? <Skeleton />  : <><Filter handleChooseFilter={handleChooseFilter}/>
+      <DoctorCard doctors={doctors} nameMajor={nameMajor}/></>}
     </div>
   )
 }
