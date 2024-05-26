@@ -1,7 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Paper from '@mui/material/Paper';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import Diversity2Icon from '@mui/icons-material/Diversity2';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 
 export default function Filter(props) {
+  const icons = [
+    <Diversity1Icon fontSize="small" />,
+    <Diversity2Icon fontSize="small" />,
+    <Diversity3Icon fontSize="small" />
+  ];
   const [majors, setMajor] = useState([]);
 
   useEffect(() => {
@@ -24,16 +37,21 @@ export default function Filter(props) {
 
   return (
     <div className='filter'>
-      {majors.map((major) => (
-        <div className='filter-item' key={major.id}>
-          <button className="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
-            border-blue-600
-            border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-            active:border-b-[2px] active:brightness-90 active:translate-y-[2px] p-5" onClick={handleClick} value={major.name}>
-              {major.name}
-          </button>
-        </div>
-      ))}
+      <Paper sx={{ width: 320, maxWidth: '100%' }}>
+        {majors.map((major, index) => (
+          <div className='filter-item' key={major.id}>
+              <MenuList>
+                <MenuItem>
+                  <ListItemIcon>
+                    {icons[index]}
+                  </ListItemIcon>
+                  <ListItemText><button onClick={handleClick} value={major.name}>{major.name}</button></ListItemText>
+                </MenuItem>
+              </MenuList>
+          </div>
+        ))}
+      </Paper>
     </div>
+    
   );
 }

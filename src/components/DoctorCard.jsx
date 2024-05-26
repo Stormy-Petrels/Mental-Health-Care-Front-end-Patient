@@ -11,50 +11,52 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState, useEffect } from 'react';
 
-const DoctorCard = ({doctors, nameMajor}) =>
-{
+const DoctorCard = ({ doctors, nameMajor }) => {
     const [currentPage, setCurrentPage] = useState(0);
-    const [totalPage, setTotalPage] = useState(0);
+    const [newDataDoctors, setNewDataDoctors] = useState([]);
+    const [currentDataDoctors, setCurrentDataDoctors] = useState([]);
 
     useEffect(() => {
-        setTotalPage(Math.ceil(doctors.length / 6))
-    },[doctors]);
+        const filteredDoctors = doctors.filter((doctor) => nameMajor === doctor.major);
+        setNewDataDoctors(filteredDoctors);
+        setCurrentPage(0);  // Reset to the first page when doctors or nameMajor changes
+    }, [doctors, nameMajor]);
 
-    var indexLast = currentPage + 1 * 6;
-    var indexFirst = indexLast - 6;
-    var currentPageData = doctors.slice(indexFirst, indexLast);
+    useEffect(() => {
+        const totalPage = Math.ceil(newDataDoctors.length / 6);
+        const indexLast = (currentPage + 1) * 6;
+        const indexFirst = indexLast - 6;
+        setCurrentDataDoctors(newDataDoctors.slice(indexFirst, indexLast));
+    }, [newDataDoctors, currentPage]);
 
-    const CheckImage = (UrlImage) => {
+    const getImage = (UrlImage) => {
         try {
-            return require("/src/assets/" + UrlImage );
-        }
-        catch (error) {
+            return require("/src/assets/" + UrlImage);
+        } catch (error) {
             return ImageDefault;
         }
     }
-    
+
     const handlePageClick = (event) => {
         setCurrentPage(event.selected);
     };
 
-    console.log(nameMajor);
-    
-    return(
+    return (
         <div className='listDoctors'>
-            {currentPageData.map((doctor) => ( 
+            {currentDataDoctors.map((doctor) => (
                 <Card className='card' sx={{ maxWidth: 200 }} key={doctor.id}>
                     <CardMedia
                         component="img"
                         alt={doctor.id}
                         height="50"
-                        image={CheckImage(doctor.image)}
+                        image={getImage(doctor.image)}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                        {doctor.fullName}
+                            {doctor.fullName}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                        {doctor.major}
+                            {doctor.major}
                         </Typography>
                     </CardContent>
                     <CardActions>
@@ -62,7 +64,7 @@ const DoctorCard = ({doctors, nameMajor}) =>
                     </CardActions>
                 </Card>
             ))}
-        <div className='paginate'>
+            <div className='paginate'>
                 <ReactPaginate
                     activeClassName={'item active '}
                     breakClassName={'item break-me '}
@@ -73,7 +75,7 @@ const DoctorCard = ({doctors, nameMajor}) =>
                     nextClassName={"item next "}
                     nextLabel={<ArrowForwardIosIcon style={{ fontSize: 18, width: 150 }} />}
                     onPageChange={handlePageClick}
-                    pageCount={totalPage}
+                    pageCount={Math.ceil(newDataDoctors.length / 6)}
                     pageClassName={'item pagination-page '}
                     pageRangeDisplayed={2}
                     previousClassName={"item previous"}
@@ -81,7 +83,7 @@ const DoctorCard = ({doctors, nameMajor}) =>
                 />
             </div>
         </div>
-    )
+    );
 }
 
 export default DoctorCard;

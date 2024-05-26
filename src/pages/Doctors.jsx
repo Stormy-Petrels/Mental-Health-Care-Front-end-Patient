@@ -7,10 +7,11 @@ import Filter from '../components/Filter';
 function Doctors() {
 
   const [doctors, setDoctors] = useState([]);
-  const [nameMajor, setFilters] = useState("");
+  const [nameMajor, setNameMajor] = useState("Bác sĩ");
 
   const handleChooseFilter = (nameMajor) => {
-    setFilters(() => nameMajor);
+    setNameMajor(() => nameMajor);
+    // console.log(nameMajor);
   }
 
   useEffect(()=> {
@@ -24,9 +25,11 @@ function Doctors() {
           console.log(error);
         }
       }
+
       fetchData();
+      
   }, [])
-  console.log(nameMajor);
+
   return (
     <div className='childrenContainer'>
       <Filter handleChooseFilter={handleChooseFilter}/> 
