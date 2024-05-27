@@ -22,7 +22,7 @@ function Navbar() {
         }
     }, []);
 
-    const handleSignOut = () => {
+    const logOutUser = () => {
         localStorage.removeItem("authToken");
         localStorage.removeItem("user"); 
         setIsLoggedIn(false);
@@ -73,7 +73,7 @@ function Navbar() {
                             {isLoggedIn ? (
                                 <>
                                     <span>Welcome, {user ? user.fullName : "User"}</span>
-                                    <Button variant="contained" onClick={handleSignOut}>
+                                    <Button variant="contained" onClick={logOutUser}>
                                         Logout
                                     </Button>
                                 </>

@@ -13,7 +13,6 @@ export default function Signin() {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [message, setMessage] = useState("");
-    const history = useHistory();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,7 +30,7 @@ export default function Signin() {
                 setMessage("Sign in successfully!");
                 localStorage.setItem("authToken", response.data.payload.token);
                 localStorage.setItem("user", JSON.stringify(response.data.payload));
-                history.push("/"); 
+                window.location.href = '/';
             }
         } catch (error) {
             if (error.response) {
