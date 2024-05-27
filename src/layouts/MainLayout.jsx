@@ -10,14 +10,15 @@ import Home from "../pages/Home";
 import DoctorDetail from "./../pages/DoctorDetail";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
+
 const MainLayout = () => {
   return (
     <div className="container">
       <Switch>
         {/* <Route exact path="/" component={Search} /> */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/doctors" component={Doctors} />
-        <Route exact path="/doctor:doctorId" component={DoctorDetail} />
+        <Route exact path="/doctors" component={Doctors}/>
+        <Route exact path="/doctor/:doctorId" component={DoctorDetail} />
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/signin" component={Signin} />
