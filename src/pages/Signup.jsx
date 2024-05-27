@@ -43,7 +43,7 @@ export default function Signup() {
                 setMessage("Sign up successfully!");
                 localStorage.setItem("authToken", response.data.payload.token);
                 localStorage.setItem("user", JSON.stringify(response.data.payload.user));
-                history.push("/"); 
+                history.push("/signin");
             }
         } catch (error) {
             if (error.response) {
