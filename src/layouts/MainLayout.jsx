@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Switch } from "react-router-dom";
 import About from "../pages/About";
 import Doctors from "../pages/Doctors";
 import Contact from "../pages/Contact";
@@ -19,7 +19,6 @@ const MainLayout = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/doctors" component={Doctors}/>
         <Route exact path="/doctor/:doctorId" component={DoctorDetail} />
-        
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/signin" component={Signin} />
