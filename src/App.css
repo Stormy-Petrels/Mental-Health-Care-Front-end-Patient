@@ -1,34 +1,147 @@
-
 body {
-    font-family: "Roboto", sans-serif;
-  }
-  body {
-    background-color: #ffffff; 
-  } 
+  font-family: "Roboto", sans-serif;
+}
+body {
+  background-color: #ffffff;
+}
 
-  .text-color {
-    color: #000000; 
-  }
-  
-  .highlight-text-color {
-    color: #1cbbd0; 
-  }
-  
-  .text-size-large {
-    font-size: 55px;
-  }
-  
-  .text-size-medium {
-    font-size: 42px;
-  }
-  
-  .text-size-small {
-    font-size: 20px; 
-  }
-  
+.container {
+  margin: 0 auto;
+}
 
-  .button {
-    color: #ffffff; 
-    background-color: #e61f57; 
-  }
+.childrenContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
 
+.text-color {
+  color: #000000;
+}
+
+.highlight-text-color {
+  color: #1cbbd0;
+}
+
+.text-size-large {
+  font-size: 55px;
+}
+
+.text-size-medium {
+  font-size: 42px;
+}
+
+.text-size-small {
+  font-size: 20px;
+}
+
+.button {
+  color: #ffffff;
+  background-color: #e61f57;
+}
+
+.listDoctors {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  align-items: center;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  height: 100%;
+  justify-content: center;
+  width: 40px;
+}
+
+.disabled-page {
+  color: #000000;
+}
+
+.active {
+  border: solid 1px #0099ff;
+  border-radius: 40px;
+  color: #0099ff;
+  /* background-color: #0099ff; */
+}
+
+.next {
+  font-size: 7px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  border-radius: 1px;
+  right: 30%;
+}
+
+.pagination {
+  align-items: center;
+  /* background-color: #1CBBD0; */
+  display: flex;
+  /* flex-direction: row; */
+  height: 40px;
+  justify-content: center;
+  list-style-type: none;
+  position: relative;
+  width: auto;
+  border-radius: 2px;
+  min-width: 620px;
+}
+
+.pagination-page {
+  font-weight: 700;
+}
+
+.previous {
+  font-size: 7px;
+  height: 40px;
+  left: 0;
+  position: absolute;
+  width: 50px;
+  border-radius: 1px;
+  left: 30%;
+}
+
+.paginate {
+  grid-column-end: span 3;
+}
+
+.filter {
+  height: 60vh !important;
+  width: 15vw;
+  /* border: 2px solid black !important; */
+  /* border-radius: 5px; */
+  /* background-color: #0099ff; */
+  /* box-shadow: 5px 5px #999; */
+  padding-right: 10px !important;
+  margin: 0 20px !important;
+  padding: 5px;
+}
+
+li > button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0099ff;
+}
+
+.filter-item {
+  gap: 10px;
+}
+
+.process {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-size: 20px;
+  font-weight: 700;
+}
