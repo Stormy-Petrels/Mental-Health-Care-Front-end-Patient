@@ -24,19 +24,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
         setCurrentDataDoctors(newDataDoctors.slice(indexFirst, indexLast));
     }, [newDataDoctors, currentPage]);
 
-    const getImage = (UrlImage) => {
-        
-        if (!UrlImage || typeof UrlImage !== 'string') {
-            return ImageDefault; 
-        }
-        
-        const isValidUrl = /^(?!.*[<>:"\/\\|?*]).*$/;
-        if (!isValidUrl.test(UrlImage)) {
-            return ImageDefault;
-        }
-
-        return "http://127.0.0.1:8000/images/" + UrlImage;
-    }
+    const baseURL = "http://127.0.0.1:8000/images/";
 
     const handlePageClick = (event) => {
         setCurrentPage(event.selected);
@@ -68,8 +56,8 @@ const DoctorCard = ({ doctors, nameMajor }) => {
                   </button>
                 
                   <img
-                    src={getImage(doctor.image)}
-                    alt={doctor.id}
+                     src={`${baseURL}${doctor.image}`}
+                    alt={doctor.image}
                     className="h-56 w-100 group-hover:scale-105 sm:h-65"
                   />
                 

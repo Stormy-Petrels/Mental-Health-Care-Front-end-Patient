@@ -19,7 +19,7 @@ function Doctors() {
     const fetchData = async () => 
       {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/Patient/viewListDoctors`);
+          const response = await axios.get(`http://127.0.0.1:8000/api/patient/viewListDoctors`);
           setDoctors(() => (response.data.payload));
 
           const timer = setTimeout(() => {
@@ -45,4 +45,4 @@ function Doctors() {
   )
 }
 
-export default Doctors
+export default Doctors;
