@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, TextField, Button } from '@mui/material';
-
+import Animation from "../assets/Animation - 1716997396542.json";
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,10 +50,12 @@ const Contact = () => {
         </Grid>
         <Grid item xs={1} md={6}>
           <img
-            src="https://via.placeholder.com/600x400"
+            src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?t=st=1716999256~exp=1717002856~hmac=00c60cd007155e1b6e3e0f78c48b27b62dc38cfd2beae00e69cfff785f309dda&w=740"
             alt="Contact Us"
             className="w-full h-auto rounded-lg"
           />
+
+          
         </Grid>
       </Grid>
     </Container>
