@@ -35,7 +35,7 @@ function Home() {
   );
 
   const infoCardsData = [
-    { data: "+ 5120", text: "Happy Patients" },
+    { data: "+ 51", text: "Happy Patients" },
     { data: "+ 26", text: "Total Branches" },
     { data: "+ 50", text: "Senior Doctors" },
     { data: "+ 20", text: "Years Experience" },
@@ -44,7 +44,7 @@ function Home() {
   return (
     <div>
       <Hero />
-      <section className="mx-auto max-w-screen-2xl mt-20 sm:px-6 lg:px-20">
+      <section className="mx-auto max-w-screen-xl mt-20 sm:px-6 lg:px-20">
         <div className="self-center ">
           <div className="flex text-base ">
             {infoCardsData.map((data, index) => (
