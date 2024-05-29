@@ -36,13 +36,13 @@ const DoctorDetail = () => {
       <div className="max-w-[1170px] pt-28 pb-20 px-5 mx-auto">
         <div className="grid md:grid-cols-3 gap-[50px]">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-5">
-              <figure className="max-w-[200px] max-h-[200px]">
-                <img src={doctor.image} alt="Doctor profile" className="w-full" />
+            <div className="flex gap-8">
+              <figure>
+                <img src={"http://127.0.0.1:8000/images/" + doctor.image} alt="Doctor profile" className="w-[250px] h-[250px] object-cover" />
               </figure>
 
-              <div>
-                <span className="bg-[#59e5f2] px-6 py-2 text-lg font-extrabold rounded">
+              <div className="py-3">
+                <span className="bg-[#59e5f2] px-6 p-3 text-lg font-extrabold rounded">
                   {doctor.major}
                 </span>
                 <h3 className="text-2xl mt-4 py-3 font-extrabold">
@@ -87,7 +87,7 @@ const DoctorDetail = () => {
             </div>
           </div>
           <div className="md:col-span-1">
-            <div className="scroll-to-top" style={{ position: 'fixed', top: '20%', right: '10%', transform: 'translateX(-50%)' }}>
+            <div className="scroll-to-top" style={{ position: 'fixed', top: '15%', right: '20%', transform: 'translateX(-50%)' }}>
               <Button onClick={handleScrollToTop} variant="contained">
                 <Link to="/">Book Appoinment</Link>
               </Button>
