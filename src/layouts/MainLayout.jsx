@@ -18,7 +18,7 @@ const MainLayout = () => {
       <Switch>
         {/* <Route exact path="/" component={Search} /> */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/profile/me" component={MyAccount}/>
+        <Route exact path="/profile" component={MyAccount}/>
         <Route exact path="/doctors" component={Doctors}/>
         <Route exact path="/doctor/:doctorId" component={DoctorDetail} />
         <Route exact path="/about" component={About} />

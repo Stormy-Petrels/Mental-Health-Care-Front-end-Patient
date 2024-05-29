@@ -48,6 +48,13 @@ const Contact = () => {
             </form>
           </div>
         </Grid>
+        <Grid item xs={1} md={6}>
+          <img
+            src="https://via.placeholder.com/600x400"
+            alt="Contact Us"
+            className="w-full h-auto rounded-lg"
+          />
+        </Grid>
       </Grid>
     </Container>
   );
