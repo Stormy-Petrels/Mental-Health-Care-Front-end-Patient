@@ -2,115 +2,139 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../components/Logo";
 import Button from "@mui/material/Button";
+import ImageDefaultDoctor from '../assets/ImageDefaultDoctor.jpg';
+import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const isMenuOpen = Boolean(anchorEl);
+    const history = useHistory();
 
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            setScrolled(true);
+        } else {
+            setScrolled(false);
+        }
     };
-  }, []);
-  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const history = useHistory();
 
-  useEffect(() => {
-      const token = localStorage.getItem("authToken");
-      const userString = localStorage.getItem("user");
-      if (token && userString) {
-          try {
-              const user = JSON.parse(userString);
-              setIsLoggedIn(true);
-              setUser(user);
-          } catch (error) {
-              console.error("Error parsing user data:", error);
-          }
-      }
-  }, []);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
-  const logOutUser = () => {
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("user"); 
-      setIsLoggedIn(false);
-      setUser(null);
-  };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  return (
-      <div>
-          <header className={`bg-white shadow-md ${scrolled ? 'shadow-gray-500' : 'shadow-none'} fixed w-full z-10 transition-all duration-300`}>
-              <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-                  <div className="flex h-16 items-center justify-between">
-                      <div className="md:flex md:items-center md:gap-12">
-                          <Link className="flex items-center justify-center text-cyan-500">
-                              <span className="sr-only">Home</span>
-                              <Logo />
-                              <p className="text-cyan-500 ml-2 text-2xl">Mental Health Care</p>
-                          </Link>
-                      </div>
+    const logOutUser = () => {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("user");
+        setIsLoggedIn(false);
+        setUser(null);
+    };
 
-                      <div className="hidden md:block">
-                          <nav aria-label="Global">
-                              <ul className="flex items-center gap-6 text-sm">
-                                  <li>
-                                      <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/">
-                                          Home
-                                      </Link>
-                                  </li>
-                                  <li>
-                                      <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/doctors">
-                                          Doctors
-                                      </Link>
-                                  </li>
-                                  <li>
-                                      <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/about">
-                                          About
-                                      </Link>
-                                  </li>
-                                  <li>
-                                      <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/contact">
-                                          Contact
-                                      </Link>
-                                  </li>
-                              </ul>
-                          </nav>
-                      </div>
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
-                      <div className="flex items-center gap-4">
-                          {isLoggedIn ? (
-                              <>
-                                  <span>Welcome, {user ? user.fullName : "User"}</span>
-                                  <Button variant="contained" onClick={logOutUser}>
-                                      Logout
-                                  </Button>
-                              </>
-                          ) : (
-                              <>
-                                  {/* Hiển thị nút "Sign in" và "Sign up" khi chưa đăng nhập thành công */}
-                                  <Button variant="contained">
-                                      <Link to="/signin" style={{ color: 'inherit', textDecoration: 'none' }}>Sign in</Link>
-                                  </Button>
-                                  <Button variant="outlined">
-                                      <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>Sign up</Link>
-                                  </Button>
-                              </>
-                          )}
-                      </div>
-                  </div>
-              </div>
-          </header>
-      </div>
-  );
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        const userString = localStorage.getItem("user");
+        if (token && userString) {
+            try {
+                const user = JSON.parse(userString);
+                setIsLoggedIn(true);
+                setUser(user);
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+            }
+        }
+    }, []);
+
+    return (
+        <div>
+            <header className={`bg-white shadow-md ${scrolled ? 'shadow-gray-500' : 'shadow-none'} fixed w-full z-10 transition-all duration-300`}>
+                <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+                    <div className="flex h-16 items-center justify-between">
+                        <div className="md:flex md:items-center md:gap-12">
+                            <Link className="flex items-center justify-center text-cyan-500">
+                                <span className="sr-only">Home</span>
+                                <Logo />
+                                <p className="text-cyan-500 ml-2 text-2xl">Mental Health Care</p>
+                            </Link>
+                        </div>
+
+                        <div className="hidden md:block">
+                            <nav aria-label="Global">
+                                <ul className="flex items-center gap-6 text-sm">
+                                    <li>
+                                        <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/">
+                                            Home
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/doctors">
+                                            Doctors
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/about">
+                                            About
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="text-size-small text-stone-500 transition hover:text-gray-500/75" to="/contact">
+                                            Contact
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div className="flex items-center gap-2 mx-5">
+                            {isLoggedIn ? (
+                                <>
+                                    <Tooltip title="Account settings">
+                                        <IconButton onClick={handleClick} size="small" aria-controls={isMenuOpen ? 'account-menu' : undefined} aria-haspopup="true">
+                                            <Avatar src={user.image ? `http://127.0.0.1:8000/images/${user.image}` : ImageDefaultDoctor} alt="User Avatar" style={{ width: '40px', height: '40px', cursor: 'pointer' }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                    
+                                    <Menu anchorEl={anchorEl} id="account-menu" open={Boolean(anchorEl)} onClose={handleClose} onClick={handleClose}>
+                                        <MenuItem component={Link} to="/profile" onClick={handleClose}>
+                                            <Avatar src={user.image ? `http://127.0.0.1:8000/images/${user.image}` : ImageDefaultDoctor} style={{ marginRight: '10px' }}/> Profile
+                                        </MenuItem>
+
+                                        <MenuItem>
+                                            <Button variant="contained" onClick={logOutUser} style={{ backgroundColor: '#f50057', color: '#fff' }}>
+                                                Logout
+                                            </Button>
+                                        </MenuItem>
+                                    </Menu>
+                                </>
+                            ) : (
+                                <>
+                                    {/* Hiển thị nút "Sign in" và "Sign up" khi chưa đăng nhập thành công */}
+                                    <Button variant="contained">
+                                        <Link to="/signin" style={{ color: 'inherit', textDecoration: 'none' }}>Sign in</Link>
+                                    </Button>
+                                    <Button variant="outlined">
+                                        <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>Sign up</Link>
+                                    </Button>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+    );
 }
 
 export default Navbar;

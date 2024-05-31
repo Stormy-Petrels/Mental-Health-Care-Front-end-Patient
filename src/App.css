@@ -47,6 +47,7 @@ body {
   column-gap: 10px;
   justify-content: center;
   align-items: center;
+  padding-top: 5%;
 }
 
 .item {
@@ -145,4 +146,9 @@ li > button:hover {
   width: 100vw;
   font-size: 20px;
   font-weight: 700;
+}
+
+.p-datatable .p-datatable-thead > tr > th,
+.p-datatable .p-datatable-tbody > tr > td {
+    border: 1px solid #ddd;
 }

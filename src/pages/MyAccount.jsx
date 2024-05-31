@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import userImg from "../assets/doctor-img01.png";
+import React, { useEffect, useState } from "react";
+import ImageDefaultDoctor from '../assets/ImageDefaultDoctor.jpg';
 import {
     Container,
     Grid,
@@ -9,30 +9,41 @@ import {
     Avatar,
     useTheme
 } from '@mui/material';
-import MyBooking from "./MyBooking";
-import Profile from "./Profile";
-
+import MyBooking from "../components/MyBooking";
+import Profile from "../components/Profile";
 
 const MyAccount = () => {
     const [tab, setTab] = useState('bookings');
     const theme = useTheme();
+    const [user, setUser] = useState(null);
+    const [file, setFile] = useState(null);
+
+    const handleChange = (event) => {
+        const selectedFile = URL.createObjectURL(event.target.files[0]);
+        setFile(selectedFile);
+    };
+
+   useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        const userString = localStorage.getItem("user");
+        if (token && userString) {
+            try {
+                const user = JSON.parse(userString);
+                setUser(user);
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+            }
+        }
+    }, []);
 
     return (
-        <Container maxWidth="lg" sx={{ py: 15, px: 2 }}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={4}>
-                    <Box
-                        sx={{
-                            pb: 6,
-                            px: 3,
-                            borderRadius: 2,
-                            boxShadow: 3,
-                            textAlign: 'center'
-                        }}
-                    >
+        <Container maxWidth="lg" sx={{ py: 10, px: 2 }}>
+            <Grid container spacing={4}>
+                <Grid item xs={6} md={3}>
+                    <Box sx={{ pb: 6, px: 3, borderRadius: 2, boxShadow: 3, textAlign: 'center' }}>
                         <Box display="flex" justifyContent="center" mb={3}>
                             <Avatar
-                                src={userImg}
+                                src={user?.image ? `http://127.0.0.1:8000/images/${user.image}` : ImageDefaultDoctor}
                                 alt="User Image"
                                 sx={{
                                     mt: 4,
@@ -43,35 +54,29 @@ const MyAccount = () => {
                             />
                         </Box>
                         <Typography variant="h6" component="h3" sx={{ fontWeight: 'bold' }}>
-                            Muhibur Rahman
+                            {user?.fullName}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            example@gmail.com
+                            {user?.email}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            0987654321
+                            {user?.phone}
                         </Typography>
-                        <Box mt={6}>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                sx={{ mb: 2 }}
-                            >
-                                Logout
-                            </Button>
-                            <Button fullWidth variant="contained" color="error">
-                                Delete account
-                            </Button>
+
+                        <Box mt={3}>
+                            <div className="App">
+                                <input type="file" onChange={handleChange} />
+                                {file && <img src={file} alt="Selected file" />}
+                            </div>
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item xs={12} md={8}>
-                    <Box sx={{ px: 10 }}>
+                <Grid item xs={12} md={9}>
+                    <Box sx={{ px: 30 }}>
                         <Button
                             onClick={() => setTab('bookings')}
                             variant={tab === 'bookings' ? 'contained' : 'outlined'}
-                            color={tab === 'bookings' ? 'primary' : 'inherit'}
+                            color={tab === 'bookings' ? 'error' : 'inherit'}
                             sx={{
                                 p: 1,
                                 mr: 2,
@@ -83,29 +88,25 @@ const MyAccount = () => {
                             My Bookings
                         </Button>
                         <Button
-                            onClick={() => setTab('settings')}
-                            variant={tab === 'settings' ? 'contained' : 'outlined'}
-                            color={tab === 'settings' ? 'primary' : 'inherit'}
+                            onClick={() => setTab('profile')}
+                            variant={tab === 'profile' ? 'contained' : 'outlined'}
+                            color={tab === 'profile' ? 'error' : 'inherit'}
                             sx={{
                                 p: 1,
                                 px: 3,
                                 borderRadius: 1,
-                                fontWeight: tab === 'settings' ? 'normal' : 'bold'
+                                fontWeight: tab === 'profile' ? 'normal' : 'bold'
                             }}
                         >
-                            Profile Setting
+                            Profile
                         </Button>
                     </Box>
-                    {
-                        tab === 'bookings' && <MyBooking />
-                    }
-                     {
-                        tab === 'settings' && <Profile />
-                    }
+                    {tab === 'bookings' && <MyBooking />}
+                    {tab === 'profile' && <Profile id={user?.roleId} />} 
                 </Grid>
             </Grid>
         </Container>
     );
 };
 
-export default MyAccount
+export default MyAccount;

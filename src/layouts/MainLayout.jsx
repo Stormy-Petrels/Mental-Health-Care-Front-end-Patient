@@ -11,6 +11,7 @@ import DoctorDetail from "./../pages/DoctorDetail";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import MyAccount from "../pages/MyAccount";
+import EditProfile from "../components/EditProfile";
 
 const MainLayout = () => {
   return (
@@ -18,7 +19,8 @@ const MainLayout = () => {
       <Switch>
         {/* <Route exact path="/" component={Search} /> */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/profile" component={MyAccount}/>
+        <Route exact path="/profile" component={MyAccount} />
+        <Route path="/EditProfile" element={<EditProfile />} />
         <Route exact path="/doctors" component={Doctors}/>
         <Route exact path="/doctor/:doctorId" component={DoctorDetail} />
         <Route exact path="/about" component={About} />
