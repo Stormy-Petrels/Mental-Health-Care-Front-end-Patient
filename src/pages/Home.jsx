@@ -22,14 +22,12 @@ function Home() {
     },
   ];
 
+
   const InfoCard = ({ data, text }) => (
-    <div className="flex flex-col w-3/12 max-md:ml-0 max-md:w-full">
-      <div className="text-4xl font-extrabold leading-6 text-neutral-500 max-md:mt-10">
-        <span className="text-5xl text-cyan-500">{data}</span>
-        <br />
-        <br />
-        <br />
-        <span className="text-xl text-neutral-500">{text}</span>
+    <div className="h-32 rounded-lg flex items-center justify-center">
+      <div className="w-3/4 h-3/4 rounded-lg  flex flex-col items-center justify-center">
+        <p className="text-5xl text-cyan-500">{data}</p>
+        <p className="text-xl font-medium text-neutral-500">{text}</p>
       </div>
     </div>
   );
@@ -44,15 +42,13 @@ function Home() {
   return (
     <div>
       <Hero />
-      <section className="mx-auto max-w-screen-xl mt-20 sm:px-6 lg:px-20">
-        <div className="self-center ">
-          <div className="flex text-base ">
-            {infoCardsData.map((data, index) => (
-              <InfoCard key={index} data={data.data} text={data.text} />
-            ))}
-          </div>
-        </div>
-      </section>
+    
+
+      <div className="grid grid-cols-1 gap-1 lg:grid-cols-4 lg:gap-0 mt-6">
+        {infoCardsData.map((data, index) => (
+          <InfoCard key={index} data={data.data} text={data.text} />
+        ))}
+      </div>
 
       <section className="mx-auto max-w-screen-2xl px-6 sm:px-6 lg:px-20">
         <h1 className="self-start mt-32 text-6xl font-extrabold text-black md:mt-10 md:text-4xl">
@@ -61,8 +57,16 @@ function Home() {
         <div className="mt-14 md:mt-10 md:max-w-full">
           <div className="flex flex-col gap-10 md:flex-row md:gap-5">
             {staffCardsData.map((data, index) => (
-              <div key={index} className="flex items-start gap-5 w-full md:w-[50%] md:max-md:ml-0 md:max-md:w-full">
-                <img loading="lazy" src={data.imgSrc} alt={`${data.name}`} className="shrink-0 max-w-full aspect-[0.92] w-[207px] md:mt-7"/>
+              <div
+                key={index}
+                className="flex items-start gap-5 w-full md:w-[50%] md:max-md:ml-0 md:max-md:w-full"
+              >
+                <img
+                  loading="lazy"
+                  src={data.imgSrc}
+                  alt={`${data.name}`}
+                  className="shrink-0 max-w-full aspect-[0.92] w-[207px] md:mt-7"
+                />
                 <div className="flex flex-col py-10">
                   <h3 className="text-2xl font-extrabold text-neutral-500">
                     <span className="font-bold text-black">{data.name}</span>
@@ -92,7 +96,13 @@ function Home() {
                 Your Email Address
               </label>
               <div className="flex items-center pl-8 text-base font-bold bg-cyan-500 border border-white border-solid rounded w-2/3 mx-auto">
-                <input type="email" id="emailInput" placeholder="Enter your email" aria-label="Enter your email" className="flex-auto my-auto text-white placeholder-white bg-transparent focus:outline-none"/>
+                <input
+                  type="email"
+                  id="emailInput"
+                  placeholder="Enter your email"
+                  aria-label="Enter your email"
+                  className="flex-auto my-auto text-white placeholder-white bg-transparent focus:outline-none"
+                />
                 <Button variant="contained">
                   <Link to="">SUBSCRIBE</Link>
                 </Button>
