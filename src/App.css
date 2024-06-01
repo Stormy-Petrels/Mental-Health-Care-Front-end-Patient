@@ -45,8 +45,10 @@ body {
   grid-template-columns: auto auto auto;
   row-gap: 10px;
   column-gap: 10px;
+  
   justify-content: center;
   align-items: center;
+  padding-top:5%;
 }
 
 .item {
