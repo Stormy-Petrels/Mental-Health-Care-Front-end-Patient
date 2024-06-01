@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+// import { Route, Switch } from "react-router-dom";
 import About from "../pages/About";
 import Doctors from "../pages/Doctors";
 import Contact from "../pages/Contact";
@@ -10,17 +10,19 @@ import Home from "../pages/Home";
 import DoctorDetail from "./../pages/DoctorDetail";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
-import MyAccount from "../pages/MyAccount";
-import EditProfile from "../components/EditProfile";
+import Profile from "../pages/Profile";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from "./Navbar";
 
 const MainLayout = () => {
   return (
+    <Router >
+        <Navbar />
     <div className="container">
       <Switch>
         {/* <Route exact path="/" component={Search} /> */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/profile" component={MyAccount} />
-        <Route path="/EditProfile" element={<EditProfile />} />
+        <Route exact path="/profile/:id" component={Profile} />
         <Route exact path="/doctors" component={Doctors}/>
         <Route exact path="/doctor/:doctorId" component={DoctorDetail} />
         <Route exact path="/about" component={About} />
@@ -30,6 +32,7 @@ const MainLayout = () => {
         <Route path="/*" component={NotFound}></Route>
       </Switch>
     </div>
+    </Router>
   );
 };
 export default MainLayout;

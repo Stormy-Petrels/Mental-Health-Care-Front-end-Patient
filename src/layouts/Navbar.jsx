@@ -4,11 +4,12 @@ import Logo from "../components/Logo";
 import Button from "@mui/material/Button";
 import ImageDefaultDoctor from '../assets/ImageDefaultDoctor.jpg';
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import axios from "axios";
 
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const history = useHistory();
@@ -33,7 +34,8 @@ function Navbar() {
         localStorage.removeItem("authToken");
         localStorage.removeItem("user");
         setIsLoggedIn(false);
-        setUser(null);
+        setUser({});
+        history.push("/signin");
     };
 
     useEffect(() => {
@@ -44,17 +46,31 @@ function Navbar() {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem("authToken");
-        const userString = localStorage.getItem("user");
-        if (token && userString) {
-            try {
-                const user = JSON.parse(userString);
-                setIsLoggedIn(true);
-                setUser(user);
-            } catch (error) {
-                console.error("Error parsing user data:", error);
+        const fetchUserData = async () => {
+            const token = localStorage.getItem("authToken");
+            const userString = localStorage.getItem("user");
+            
+            if (token && userString) {
+                try {
+                    const parsedUser = JSON.parse(userString);
+                    const id = parsedUser.roleId;
+
+                    const response = await axios.get(`http://127.0.0.1:8000/api/profile/${id}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+
+                    const userData = response.data.data; // Adjusted to get the correct data object
+                    setIsLoggedIn(true);
+                    setUser(userData);
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                }
             }
-        }
+        };
+
+        fetchUserData();
     }, []);
 
     return (
@@ -63,7 +79,7 @@ function Navbar() {
                 <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 items-center justify-between">
                         <div className="md:flex md:items-center md:gap-12">
-                            <Link className="flex items-center justify-center text-cyan-500">
+                            <Link className="flex items-center justify-center text-cyan-500" to="/">
                                 <span className="sr-only">Home</span>
                                 <Logo />
                                 <p className="text-cyan-500 ml-2 text-2xl">Mental Health Care</p>
@@ -105,10 +121,10 @@ function Navbar() {
                                             <Avatar src={user.image ? `http://127.0.0.1:8000/images/${user.image}` : ImageDefaultDoctor} alt="User Avatar" style={{ width: '40px', height: '40px', cursor: 'pointer' }} />
                                         </IconButton>
                                     </Tooltip>
-                                    
-                                    <Menu anchorEl={anchorEl} id="account-menu" open={Boolean(anchorEl)} onClose={handleClose} onClick={handleClose}>
-                                        <MenuItem component={Link} to="/profile" onClick={handleClose}>
-                                            <Avatar src={user.image ? `http://127.0.0.1:8000/images/${user.image}` : ImageDefaultDoctor} style={{ marginRight: '10px' }}/> Profile
+
+                                    <Menu anchorEl={anchorEl} id="account-menu" open={isMenuOpen} onClose={handleClose} onClick={handleClose}>
+                                        <MenuItem component={Link} to={`/profile/${user.id}`} onClick={handleClose}>
+                                            <Avatar src={user.image ? `http://127.0.0.1:8000/images/${user.image}` : ImageDefaultDoctor} style={{ marginRight: '10px' }} /> Profile
                                         </MenuItem>
 
                                         <MenuItem>
@@ -120,7 +136,6 @@ function Navbar() {
                                 </>
                             ) : (
                                 <>
-                                    {/* Hiển thị nút "Sign in" và "Sign up" khi chưa đăng nhập thành công */}
                                     <Button variant="contained">
                                         <Link to="/signin" style={{ color: 'inherit', textDecoration: 'none' }}>Sign in</Link>
                                     </Button>
