@@ -94,7 +94,7 @@ function Navbar() {
                       About us
                     </Link>
                   </li>
-        
+
                   <li>
                     <Link
                       className="text-lg text-[#78716c] relative transition hover:text-[#368CF4] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#368CF4] after:transition-all after:duration-300 hover:after:w-full"
@@ -103,7 +103,6 @@ function Navbar() {
                       Contact us
                     </Link>
                   </li>
-                  
                 </ul>
               </nav>
             </div>
@@ -118,16 +117,26 @@ function Navbar() {
                 </>
               ) : (
                 <>
-                 
-                  <Button variant="contained">
-                    <Link
-                      to="/signin"
-                      style={{ color: "inherit", textDecoration: "none" }}
-                    >
-                      Sign in
-                    </Link>
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#2C74DF",
+                      textTransform: "none",
+                      color: "white",
+                      fontSize: "1.125rem",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <Link to="/signin" style={{ color: "inherit", textDecoration: "none" }} >Sign in</Link>
                   </Button>
-                  <Button variant="outlined">
+                  <Button variant="outlined" 
+                  style={{
+                   
+                    textTransform: "none",
+                    fontSize: "1.125rem",
+                    textDecoration: "none",
+                  }}
+                  >
                     <Link
                       to="/signup"
                       style={{ color: "inherit", textDecoration: "none" }}
