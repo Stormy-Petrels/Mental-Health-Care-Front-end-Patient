@@ -12,14 +12,41 @@ const Payment = () => {
     if (informationOfBooking && user) {
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/appoinment', {
-          "date": informationOfBooking.date,
-          "doctorId": informationOfBooking.doctorId,
           "patientId": informationOfBooking.patientId,
+          "doctorId": informationOfBooking.doctorId,
+          "date": informationOfBooking.date,
           "calendarId": informationOfBooking.calendarId,
+          "status": "0",
         });
         localStorage.removeItem("informationOfBooking");
         history.push(`/doctor/${informationOfBooking.doctorId}`);
         console.log(response);
+      } catch (err) {
+        console.error('Error booking time slot:', err);
+      }
+    }
+  }
+
+  const payVnpay = async (event) => {
+    event.preventDefault();
+    if (informationOfBooking && user) {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/payment/vnpayment', {
+          "total": informationOfBooking.price * 100,
+        });
+
+        const responseStore = await axios.post('http://127.0.0.1:8000/api/store/vnpayment', {
+          "patientId": informationOfBooking.patientId,
+          "doctorId": informationOfBooking.doctorId,
+          "date": informationOfBooking.date,
+          "calendarId": informationOfBooking.calendarId,
+          "status": "1",
+        });
+
+        window.location.href = response.data.data;
+        
+        console.log(response, responseStore);
+        localStorage.removeItem("informationOfBooking");
       } catch (err) {
         console.error('Error booking time slot:', err);
       }
@@ -90,12 +117,19 @@ const Payment = () => {
           <p>Lưu ý: Thông tin bệnh nhân cung cấp sẽ được sử dụng làm hồ sơ khám bệnh, hồ sơ điện tử.</p>
           <p>Quý khách vui lòng kiểm tra lại thông tin trước khi bấm "Xác nhận đặt khám".</p>
         </div>
-
+      <div style={{display: "flex"}}>
         <div className="text-center">
           <button type="submit" className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
-            Xác nhận đặt khám
+            Pay by Cash
           </button>
         </div>
+
+        <div className="text-center">
+          <button onClick={payVnpay} className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
+            Pay by VNPAY
+          </button>
+        </div>
+      </div>
       </form>
     </div>
   );
