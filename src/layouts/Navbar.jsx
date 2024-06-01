@@ -123,7 +123,7 @@ function Navbar() {
                       backgroundColor: "#2C74DF",
                       textTransform: "none",
                       color: "white",
-                      fontSize: "1.125rem",
+                      fontSize: "1em",
                       textDecoration: "none",
                     }}
                   >
@@ -133,7 +133,7 @@ function Navbar() {
                   style={{
                    
                     textTransform: "none",
-                    fontSize: "1.125rem",
+                    fontSize: "1rem",
                     textDecoration: "none",
                   }}
                   >
