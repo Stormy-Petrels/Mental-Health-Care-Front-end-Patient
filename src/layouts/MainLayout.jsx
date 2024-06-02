@@ -11,6 +11,7 @@ import DoctorDetail from "./../pages/DoctorDetail";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import MyAccount from "../pages/MyAccount";
+import Payment from "../pages/Payment";
 
 const MainLayout = () => {
   return (
@@ -25,6 +26,7 @@ const MainLayout = () => {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/patient/:id/payment" component={Payment}/>
         <Route path="/*" component={NotFound}></Route>
       </Switch>
     </div>

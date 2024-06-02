@@ -23,7 +23,6 @@ function Navbar() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const history = useHistory();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -56,7 +55,7 @@ function Navbar() {
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
-              <Link className="flex items-center justify-center text-cyan-500">
+              <Link className="flex items-center justify-center text-cyan-500" to="/">
                 <span className="sr-only">Home</span>
                 <Logo />
                 <p className="text-[#4D8DFF] ml-2 text-2xl">
