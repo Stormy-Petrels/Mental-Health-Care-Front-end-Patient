@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, TextField, Button } from '@mui/material';
-import Animation from "../assets/Animation - 1716997396542.json";
+
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();

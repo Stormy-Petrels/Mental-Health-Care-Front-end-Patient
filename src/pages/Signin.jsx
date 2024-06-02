@@ -17,8 +17,8 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import logo from "../assets/SigninSignup.jpg";
-
+import signin from "../assets/Signin.jpg";
+import UserIcon from "../assets/Animation.gif";
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,9 +91,9 @@ export default function Signin() {
             }}
           >
             <img
-              src={logo}
+              src={signin}
               alt="Logo"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              style={{ width: "80%", height: "80%", objectFit: "cover" }}
             />
           </Grid>
           <Grid
@@ -107,13 +107,14 @@ export default function Signin() {
           >
             <Box
               sx={{
-                my: 8,
+                my: 4,
                 mx: 4,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
               }}
             >
+              <img src={UserIcon} width={50} alt="login" />
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
@@ -178,10 +179,19 @@ export default function Signin() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  style={{
+                    backgroundColor: "#2C74DF",
+                    textTransform: "none",
+                    color: "white",
+                    fontSize: "1.125rem",
+                    textDecoration: "none",
+                    marginTop: "1rem",
+                    marginBottom: "1rem",
+                  }}
                 >
                   Sign in
                 </Button>
+
                 <Grid container>
                   <Grid item xs>
                     <Link href="#" variant="body2">

@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import { Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography, Container, Alert, IconButton, InputAdornment } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import logo from "../assets/SigninSignup.jpg";
-
+import signup from "../assets/Signup.jpg";
+import UserIcon from '../assets/Animation.gif';
 export default function Signup() {
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
@@ -87,17 +87,18 @@ export default function Signup() {
                                 t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
                         }}
                     >
-                        <img src={logo} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={signup} alt="Logo" style={{ width: "84%", height: "84%", objectFit: "cover" }} />
                     </Grid>
                     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                         <Box
                             sx={{
-                                my: 8, mx: 4,
+                                my: 4, mx: 4,
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",
                             }}
                         >
+                             <img src={UserIcon} width={50}  alt="signup" />
                             <Typography component="h1" variant="h5">
                                 Sign up
                             </Typography>
