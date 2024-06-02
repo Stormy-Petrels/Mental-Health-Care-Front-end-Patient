@@ -26,6 +26,7 @@ export default function Signin() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [message, setMessage] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
