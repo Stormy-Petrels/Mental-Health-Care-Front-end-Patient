@@ -3,7 +3,6 @@ import axios from "axios";
 import { formateDate } from "../utils/formateDate";
 import ButtonTime from "../components/ButtonTime";
 import { useHistory, useParams } from "react-router-dom";
-import Payment from "./Payment";
 
 const DoctorDetail = () => {
   const { doctorId } = useParams();
@@ -87,7 +86,7 @@ const DoctorDetail = () => {
   }
 
   const baseURL = "http://127.0.0.1:8000/images/";
-  console.log(timeList);
+  console.log(tab);
   return (
     <section>
       <div className="max-w-[1170px] pt-28 pb-20 px-5 mx-auto">

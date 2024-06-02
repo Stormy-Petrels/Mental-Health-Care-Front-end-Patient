@@ -34,19 +34,8 @@ const Payment = () => {
         const response = await axios.post('http://127.0.0.1:8000/api/payment/vnpayment', {
           "total": informationOfBooking.price * 100,
         });
-
-        const responseStore = await axios.post('http://127.0.0.1:8000/api/store/vnpayment', {
-          "patientId": informationOfBooking.patientId,
-          "doctorId": informationOfBooking.doctorId,
-          "date": informationOfBooking.date,
-          "calendarId": informationOfBooking.calendarId,
-          "status": "1",
-        });
-
         window.location.href = response.data.data;
-        
-        console.log(response, responseStore);
-        localStorage.removeItem("informationOfBooking");
+        console.log(response);
       } catch (err) {
         console.error('Error booking time slot:', err);
       }
@@ -74,12 +63,12 @@ const Payment = () => {
 
         <div className="mb-4 flex space-x-4">
           <div className="flex items-center">
-            <input type="radio" name="gender" id="male" className="mr-2" value="Nam" defaultChecked={user.gender === 'Nam'} />
-            <label className="text-gray-700">Nam</label>
+            <input type="radio" name="gender" id="male" className="mr-2" value="Nam" defaultChecked={user.gender === 'Nam'} checked/>
+            <label className="text-gray-700">male</label>
           </div>
           <div className="flex items-center">
             <input type="radio" name="gender" id="female" className="mr-2" value="Nữ" defaultChecked={user.gender === 'Nữ'} />
-            <label className="text-gray-700">Nữ</label>
+            <label className="text-gray-700">female</label>
           </div>
         </div>
 
@@ -114,10 +103,10 @@ const Payment = () => {
         </div>
 
         <div className="text-center text-sm text-gray-500 mb-6">
-          <p>Lưu ý: Thông tin bệnh nhân cung cấp sẽ được sử dụng làm hồ sơ khám bệnh, hồ sơ điện tử.</p>
-          <p>Quý khách vui lòng kiểm tra lại thông tin trước khi bấm "Xác nhận đặt khám".</p>
+          <p>Note: Information provided by patients will be used as medical records and electronic records.</p>
+          <p>Please check the information again before clicking "Confirm booking".</p>
         </div>
-      <div style={{display: "flex"}}>
+      <div style={{display: "flex", gap: "2px"}}>
         <div className="text-center">
           <button type="submit" className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
             Pay by Cash
