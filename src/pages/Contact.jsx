@@ -1,5 +1,6 @@
-import React from 'react';
-import { Container, Grid, TextField, Button } from '@mui/material';
+import React from "react";
+import { Container, Grid, TextField, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const Contact = () => {
   const handleSubmit = (e) => {
@@ -11,7 +12,15 @@ const Contact = () => {
     <Container className="pt-28 pb-20">
       <Grid container spacing={4} className="justify-center items-center">
         <Grid item xs={12} md={6}>
-          <div className="p-4 border border-gray-200 rounded-lg">
+          <div className="p-4 ">
+            <Typography
+              style={{ color: "#4D8DFF" }}
+              variant="h4"
+              component="h1"
+              gutterBottom
+            >
+              Contact Us
+            </Typography>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
               <TextField
                 name="name"
@@ -42,7 +51,18 @@ const Contact = () => {
                 className="w-full p-4 border border-gray-200 rounded-md"
                 required
               />
-              <Button type="submit" variant="contained" fullWidth>
+              <Button
+                type="submit"
+                style={{
+                  backgroundColor: "#2C74DF",
+                  textTransform: "none",
+                  color: "white",
+                  fontSize: "1.125rem",
+                  textDecoration: "none",
+                }}
+                variant="contained"
+                fullWidth
+              >
                 Submit
               </Button>
             </form>
@@ -54,8 +74,6 @@ const Contact = () => {
             alt="Contact Us"
             className="w-full h-auto rounded-lg"
           />
-
-          
         </Grid>
       </Grid>
     </Container>
