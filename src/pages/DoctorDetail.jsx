@@ -3,16 +3,29 @@ import axios from "axios";
 import { formateDate } from "../utils/formateDate";
 import ButtonTime from "../components/ButtonTime";
 import { useHistory, useParams } from "react-router-dom";
+import SkeletonListDoctor from "../components/SkeletonListDoctor";
 
 const DoctorDetail = () => {
   const { doctorId } = useParams();
-  const [doctor, setDoctor] = useState(null);
+  const [doctor, setDoctor] = useState(undefined); // undefined
   const [tab, setTab] = useState("about");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(""); // date
   const [timeList, setTimeList] = useState([]);
-  const patient = JSON.parse(localStorage.getItem("user"));
+  const patient = JSON.parse(localStorage.getItem("user")); // global state(redux , useContext)
   const history = useHistory();
   const currentDate = new Date().toISOString().split('T')[0];
+
+  useEffect(() => {
+    const fetchDoctorDetails = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/detail/${doctorId}`);
+        setDoctor(response.data.payload);
+      } catch (error) {
+        console.error("There was an error fetching the doctor!", error);
+      }
+    };
+    fetchDoctorDetails();
+  }, [doctorId]);
 
   const handleGetTime = (e) => {
     console.log(e.target.value);
@@ -40,23 +53,11 @@ const DoctorDetail = () => {
     }
   }, [selectedDate, doctorId]);
 
-  useEffect(() => {
-    const fetchDoctorDetails = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/detail/${doctorId}`);
-        setDoctor(response.data.payload);
-      } catch (error) {
-        console.error("There was an error fetching the doctor!", error);
-      }
-    };
-    fetchDoctorDetails();
-  }, [doctorId]);
-
   /* eslint-disable no-restricted-globals */
-  const payMent = async (timeStart, timeEnd, calendarId, price) => {
+  const payment = async (timeStart, timeEnd, calendarId, price) => {
     const userConfirmed = confirm(`Are you sure you want to book this time? from ${timeStart} and ${timeEnd}`);
   
-    if (userConfirmed) {
+    if (userConfirmed) { // query url
       const data = {
         "date": selectedDate,
         "doctorId": doctorId,
@@ -77,11 +78,9 @@ const DoctorDetail = () => {
   };
   /* eslint-enable no-restricted-globals */
 
-  if (!doctor) {
+  if (!doctor) { 
     return (
-      <div className="flex justify-center items-center h-screen">
-        No doctor found
-      </div>
+      <SkeletonListDoctor />
     );
   }
 
@@ -117,7 +116,7 @@ const DoctorDetail = () => {
                   
                   <ul className="grid sm:grid-cols-2 gap-[10px] pt-4 md:p-5">
                     {timeList.length > 0 ? timeList.map((time) => (
-                      <ButtonTime times={time} handle={payMent} key={time.id}/>
+                      <ButtonTime times={time} handle={payment} key={time.id}/>
                     )) : <p>Unavailable time</p>}
                   </ul>
                 </div>
