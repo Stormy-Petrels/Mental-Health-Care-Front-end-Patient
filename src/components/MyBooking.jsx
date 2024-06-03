@@ -2,8 +2,8 @@ import React from 'react'
 
 function MyBooking() {
   return (
-    <div>
-        History booking
+    <div className="py-10">
+      History booking
     </div>
   )
 }

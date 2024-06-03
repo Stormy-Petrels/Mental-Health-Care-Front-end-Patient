@@ -123,7 +123,7 @@ const DoctorDetail = () => {
                 </div>
             </div>
             <div className="mt-20 border-b-4 border-solid border-[#01010134]">
-              <button onClick={() => setTab("about")} className={`py-2 mr-5 text-2xl leading-7 text-headingColor font-extrabold`}>
+              <button className={`py-2 mr-5 text-2xl leading-7 text-headingColor font-extrabold`}>
                 About
               </button>
             </div>
