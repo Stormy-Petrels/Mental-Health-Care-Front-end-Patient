@@ -85,7 +85,7 @@ const DoctorDetail = () => {
   }
 
   const baseURL = "http://127.0.0.1:8000/images/";
-  console.log(tab);
+  console.log(timeList);
   return (
     <section>
       <div className="max-w-[1170px] pt-28 pb-20 px-5 mx-auto">
