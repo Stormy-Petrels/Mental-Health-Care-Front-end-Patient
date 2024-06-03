@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "../layouts/Hero";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Home() {
   const staffCardsData = [
@@ -31,6 +32,42 @@ function Home() {
       </div>
     </div>
   );
+  /* eslint-enable no-restricted-globals */
+  useEffect(() => {
+    const checkTransactionStatus = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const vnp_TransactionStatus = urlParams.get('vnp_TransactionStatus');
+      console.log(vnp_TransactionStatus);
+  
+      if (vnp_TransactionStatus !== null) {
+        console.log("vnp_TransactionStatus: " + vnp_TransactionStatus);
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState(null, '', newUrl);
+        await handlePaymentResponse(vnp_TransactionStatus);
+      }
+    };
+  
+    const handlePaymentResponse = async (vnp_TransactionStatus) => {
+      const informationOfBooking = JSON.parse(localStorage.getItem("informationOfBooking"));
+      if (vnp_TransactionStatus === "00") {
+        const responseStore = await axios.post('http://127.0.0.1:8000/api/store/vnpayment', {
+            "patientId": informationOfBooking.patientId,
+            "doctorId": informationOfBooking.doctorId,
+            "date": informationOfBooking.date,
+            "calendarId": informationOfBooking.calendarId,
+            "status": "1",
+        });
+  
+        console.log(responseStore);
+        localStorage.removeItem("informationOfBooking");
+      } else {
+        localStorage.removeItem("informationOfBooking");
+        console.error('Transaction was not successful.');
+      }
+    };
+  
+    checkTransactionStatus();
+  },[])
 
   const infoCardsData = [
     { data: "+ 51", text: "Happy Patients" },
