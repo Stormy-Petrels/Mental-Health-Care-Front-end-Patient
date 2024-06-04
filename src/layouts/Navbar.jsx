@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import ImageDefaultDoctor from '../assets/ImageDefaultDoctor.jpg';
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
