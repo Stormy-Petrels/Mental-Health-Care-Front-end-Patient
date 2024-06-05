@@ -12,12 +12,10 @@ import {
   TablePagination,
   Typography,
   TableSortLabel,
-  Button,
   Avatar
 } from "@mui/material";
 
 function History({ id }) {
-  // const [loading, setLoading] = useState(true);
   const [appointments, setAppointments] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
