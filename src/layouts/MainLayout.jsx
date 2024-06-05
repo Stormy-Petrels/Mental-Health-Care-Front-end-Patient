@@ -10,7 +10,6 @@ import Home from "../pages/Home";
 import DoctorDetail from "./../pages/DoctorDetail";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
-import MyAccount from "../pages/MyAccount";
 import Payment from "../pages/Payment";
 import Profile from "../pages/Profile";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

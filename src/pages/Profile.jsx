@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import ImageDefaultDoctor from '../assets/ImageDefaultDoctor.jpg';
 import axios from 'axios';
+import History from './History';
 
 const Profile = () => {
     const { id } = useParams();
@@ -112,17 +113,17 @@ const Profile = () => {
         <Container className="container light-style flex-grow-1 container-p-y py-20">
             <Card>
                 <Grid container>
-                    <Grid item md={3}>
+                    <Grid item md={2.5}>
                         <List component="nav">
                             <ListItemButton selected={activeTab === 0} onClick={(event) => handleTabChange(event, 0)}>
                                 <ListItemText primary="My Profile" />
-                            </ListItemButton>   
+                            </ListItemButton>
                             <ListItemButton selected={activeTab === 1} onClick={(event) => handleTabChange(event, 1)}>
                                 <ListItemText primary="History Appointment" />
                             </ListItemButton>
                         </List>
                     </Grid>
-                    <Grid item md={9}>
+                    <Grid item md={9.5}>
                         <Box>
                             {activeTab === 0 && (
                                 <Box sx={{ p: 3 }}>
@@ -141,115 +142,30 @@ const Profile = () => {
                                     <Box sx={{ p: 3 }}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={12} md={6}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Full Name"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    name="fullName"
-                                                    value={editInfo.fullName}
-                                                    onChange={handleInputChange}
-                                                    disabled={!isEditing}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Full Name" variant="outlined" margin="normal" name="fullName" value={editInfo.fullName} onChange={handleInputChange} disabled={!isEditing} InputLabelProps={{ shrink: true, }} />
                                             </Grid>
                                             <Grid item xs={12} md={6}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Email"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    name="email"
-                                                    value={editInfo.email}
-                                                    onChange={handleInputChange}
-                                                    disabled={!isEditing}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Email" variant="outlined" margin="normal" name="email" value={editInfo.email} onChange={handleInputChange} disabled={!isEditing} InputLabelProps={{ shrink: true, }} />
                                             </Grid>
                                             <Grid item xs={12} md={6}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Password"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    name="password"
-                                                    value={editInfo.password}
-                                                    onChange={handleInputChange}
-                                                    disabled={!isEditing}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Password" variant="outlined" margin="normal" name="password" value={editInfo.password} onChange={handleInputChange} disabled={!isEditing} InputLabelProps={{ shrink: true, }}/>
                                             </Grid>
                                             <Grid item xs={12} md={6}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Phone"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    name="phone"
-                                                    value={editInfo.phone}
-                                                    onChange={handleInputChange}
-                                                    disabled={!isEditing}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Phone" variant="outlined" margin="normal" name="phone" value={editInfo.phone} onChange={handleInputChange} disabled={!isEditing} InputLabelProps={{ shrink: true, }} />
                                             </Grid>
                                             <Grid item xs={12} md={6}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Address"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    name="address"
-                                                    value={editInfo.address}
-                                                    onChange={handleInputChange}
-                                                    disabled={!isEditing}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Address" variant="outlined" margin="normal" name="address" value={editInfo.address} onChange={handleInputChange} disabled={!isEditing} InputLabelProps={{ shrink: true, }} />
                                             </Grid>
                                             <Grid item xs={12} md={6}>
-                                                <Button
-                                                    variant="outlined"
-                                                    component="label"
-                                                    sx={{ mt: 2 }}
-                                                    disabled={!isEditing}
-                                                >
-                                                    <input  name="urlImage"  accept="image/*" type="file" onChange={handleImageChange} />
+                                                <Button variant="outlined" component="label" sx={{ mt: 2 }} disabled={!isEditing} >
+                                                    <input name="urlImage" accept="image/*" type="file" onChange={handleImageChange} />
                                                 </Button>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Health Condition"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    value={editInfo.healthCondition}
-                                                    disabled
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Health Condition" variant="outlined" margin="normal" value={editInfo.healthCondition} disabled InputLabelProps={{ shrink: true, }} />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    label="Note"
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    value={editInfo.note}
-                                                    disabled
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                                <TextField fullWidth label="Note" variant="outlined" margin="normal" value={editInfo.note} disabled InputLabelProps={{ shrink: true, }} />
                                             </Grid>
 
                                             <Grid item xs={12}>
@@ -270,7 +186,7 @@ const Profile = () => {
                             )}
                             {activeTab === 1 && (
                                 <Box sx={{ p: 3 }}>
-                                    <p>Chưa có lịch đặt</p>
+                                    <History id={patient?.id}/>
                                 </Box>
                             )}
                         </Box>
