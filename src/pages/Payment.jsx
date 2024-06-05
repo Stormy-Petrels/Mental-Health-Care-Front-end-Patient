@@ -43,7 +43,8 @@ const Payment = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+    <div className="pt-10 pb-20 ">
+       <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
       <div className="text-center mb-6">
         <img src={`${baseURL}${informationOfBooking.doctorImage}`} alt="Doctor" className="mx-auto mb-4 w-[250px] h-[250px] object-cover"/>
         <h1 className="text-2xl font-bold">{informationOfBooking.doctorName}</h1>
@@ -128,6 +129,7 @@ const Payment = () => {
       </div>
       </form>
     </div>
+    </div>  
   );
 };
 
