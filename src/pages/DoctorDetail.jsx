@@ -56,7 +56,7 @@ const DoctorDetail = () => {
   const payMent = async (timeStart, timeEnd, calendarId, price) => {
     const userConfirmed = confirm(`Are you sure you want to book this time? from ${timeStart} and ${timeEnd}`);
   
-    if (userConfirmed) {
+    if (userConfirmed && patient != null) {
       const data = {
         "date": selectedDate,
         "doctorId": doctorId,
@@ -73,6 +73,7 @@ const DoctorDetail = () => {
       history.push(`/patient/${patient.roleId}/payment`);
     } else {
       console.log("Booking cancelled");
+      alert("You must be logged in!!!");
     }
   };
   /* eslint-enable no-restricted-globals */
