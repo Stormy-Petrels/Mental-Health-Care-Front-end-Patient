@@ -4,10 +4,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import slider1 from "../assets/slider1.png";
-import slider2 from "../assets/slider2.png";
-import slider3 from "../assets/slider3.png";
-import slider4 from "../assets/slider4.png";
+import slider1 from "../assets/slider1.jpg";
+import slider2 from "../assets/slider2.jpg";
+import slider3 from "../assets/slider3.jpg";
+import slider4 from "../assets/slider4.jpg";
 
 function Hero() {
   const slides = [

@@ -1,16 +1,15 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import ImageDefault from "../assets/ImageDefaultDoctor.jpg";
-import ReactPaginate from "react-paginate";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import ReactPaginate from 'react-paginate';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const DoctorCard = ({ doctors, nameMajor }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [newDataDoctors, setNewDataDoctors] = useState([]);
-  const [currentDataDoctors, setCurrentDataDoctors] = useState([]);
+  const [currentDataDoctors, setCurrentDataDoctors] = useState(doctors);
 
   useEffect(() => {
     const filteredDoctors = doctors.filter(
@@ -40,7 +39,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
           className="group relative block overflow-hidden"
           key={doctor.id}
         >
-          <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
+          <button className="absolute end-4 top-4 z-0 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
             <span className="sr-only">Wishlist</span>
 
             <svg
@@ -62,7 +61,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
           <img
             src={`${baseURL}${doctor.image}`}
             alt={doctor.image}
-            className="w-[350px] h-[300px] cover-object "
+            className="w-[320px] h-[310px] cover-object "
           />
 
           <div className="relative border border-gray-100 bg-white p-6">
