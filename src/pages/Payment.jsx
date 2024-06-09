@@ -6,7 +6,9 @@ const Payment = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const baseURL = "http://127.0.0.1:8000/images/";
   const history = useHistory();
-
+  let convert = parseFloat(informationOfBooking.price);
+  let coverPrice = convert.toLocaleString('vi-VN');
+  console.log(coverPrice);
   const getBooking = async (event) => {
     event.preventDefault();
     if (informationOfBooking && user) {
@@ -32,7 +34,7 @@ const Payment = () => {
     if (informationOfBooking && user) {
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/payment/vnpayment', {
-          "total": informationOfBooking.price * 100,
+          "total": informationOfBooking.price / 10,
         });
         window.location.href = response.data.data;
         console.log(response);
@@ -53,24 +55,13 @@ const Payment = () => {
 
       <div className="border p-4 mb-6">
         <span className="text-lg font-semibold">Price:</span>
-        <span className="text-lg font-semibold text-orange-500">{informationOfBooking.price}₫</span>
+        <span className="text-lg font-semibold text-orange-500">{coverPrice}₫</span>
       </div>
 
       <form onSubmit={getBooking}>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">Name of patient (required)</label>
           <input type="text" placeholder="Họ và Tên" className="w-full p-2 border rounded" defaultValue={user.fullName} disabled/>
-        </div>
-
-        <div className="mb-4 flex space-x-4">
-          <div className="flex items-center">
-            <input type="radio" name="gender" id="male" className="mr-2" value="Nam" defaultChecked={user.gender === 'Nam'} checked disabled/>
-            <label className="text-gray-700">male</label>
-          </div>
-          <div className="flex items-center">
-            <input type="radio" name="gender" id="female" className="mr-2" value="Nữ" defaultChecked={user.gender === 'Nữ'} disabled/>
-            <label className="text-gray-700">female</label>
-          </div>
         </div>
 
         <div className="mb-4">
@@ -91,7 +82,7 @@ const Payment = () => {
         <div className="border-t pt-4 mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="text-lg font-semibold">Price:</span>
-            <span className="text-lg font-semibold text-orange-500">{informationOfBooking.price}₫</span>
+            <span className="text-lg font-semibold text-orange-500">{coverPrice}₫</span>
           </div>
           <div className="flex justify-between items-center mb-2">
             <span className="text-lg font-semibold">Price to book:</span>
@@ -99,7 +90,7 @@ const Payment = () => {
           </div>
           <div className="flex justify-between items-center">
             <span className="text-lg font-semibold">Total Price:</span>
-            <span className="text-lg font-semibold text-orange-500">{informationOfBooking.price}₫</span>
+            <span className="text-lg font-semibold text-orange-500">{coverPrice}₫</span>
           </div>
         </div>
 
@@ -108,25 +99,46 @@ const Payment = () => {
           <p style={{color: "red"}}>* if you want change something please change your information on your profile.</p>
           <p style={{color: "red"}}>Please check the information again before clicking "Confirm booking".</p>
         </div>
-      <div style={{display: "flex", gap: "2px"}}>
-        <div className="text-center">
-          {/* <button type="submit" className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
-            Pay by Cash
-          </button> */}
+        <div style={{display: "flex", gap: "2px", width: "100%"}}>
+          <div style={{width: "50%", textAlign: "center"}}>
+              <button 
+                  onClick={payVnpay} 
+                  style={{
+                      backgroundColor: "#FFEB3B",
+                      color: "white",
+                      fontWeight: "bold",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      width: "100%",
+                      transition: "background-color 0.3s",
+                      border: "1px solid",
+                  }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = "#FDD835"}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = "#FFEB3B"}
+              >
+                  Pay by VNPAY
+              </button>
+          </div>
+          <div style={{width: "50%", textAlign: "end"}}>
+              <button 
+                  onClick={() => history.push('/doctors')} 
+                  style={{
+                      backgroundColor: "white",
+                      color: "black",
+                      fontWeight: "bold",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      width: "100%",
+                      transition: "background-color 0.3s",
+                      outline: "1px solid red",
+                  }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = "red"}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = "white"}
+              >
+                  Cancel
+              </button>
+          </div>
         </div>
-
-        <div className="text-center">
-          <button onClick={payVnpay} className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
-            Pay by VNPAY
-          </button>
-        </div>
-
-        <div className="text-end">
-          <button onClick={() => history.push('/doctors')} className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">
-            Back
-          </button>
-        </div>
-      </div>
       </form>
     </div>
     </div>  

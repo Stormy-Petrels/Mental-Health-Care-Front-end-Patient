@@ -38,6 +38,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
           to="#"
           className="group relative block overflow-hidden"
           key={doctor.id}
+          id='card'
         >
           <button className="absolute end-4 top-4 z-0 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
             <span className="sr-only">Wishlist</span>
@@ -61,7 +62,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
           <img
             src={`${baseURL}${doctor.image}`}
             alt={doctor.image}
-            className="w-[320px] h-[310px] cover-object "
+            className="w-[320px] h-[310px] cover-object"
           />
 
           <div className="relative border border-gray-100 bg-white p-6">
@@ -70,15 +71,17 @@ const DoctorCard = ({ doctors, nameMajor }) => {
               {doctor.major}{" "}
             </span>
 
-            <h3 className="mt-4 text-lg font-medium text-gray-900">
-              {doctor.fullName}
+            <h3 className="mt-4 text-lg font-medium">
+              <p style={{color:"#166CD0", fontWeight: "bold", fontFamily:"Audiowide, Sans-serif"}}>{doctor.fullName}</p>
             </h3>
 
-            <form className="mt-4">
-              <Button variant="contained">
-                <Link to={"/doctor/" + doctor.id}>Book</Link>
-              </Button>
-            </form>
+            <Link to={"/doctor/" + doctor.id}>
+              <form className="mt-4">
+                <Button variant="contained" size="large" fullWidth="true" style={{backgroundColor: "#E3F2FF"}}>
+                  <p style={{color:"#1b3250", fontWeight: "bold"}}>Book</p>
+                </Button>
+              </form>
+            </Link>
           </div>
         </Link>
       ))}

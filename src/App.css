@@ -152,3 +152,8 @@ li > button:hover {
 .p-datatable .p-datatable-tbody > tr > td {
     border: 1px solid #ddd;
 }
+
+#card {
+  border-radius: 12px;
+  border: 2px solid #d0cfcf;
+}

@@ -110,10 +110,10 @@ const DoctorDetail = () => {
                 value={selectedDate} 
                 min={currentDate}
               />
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-3 gap-4">
                 {timeList.length > 0 ? (
                   timeList.map((time) => (
-                    <ButtonTime times={time} handle={payMent} key={time.id} />
+                    <ButtonTime times={time} handle={payMent} key={time.id}/>
                   ))
                 ) : (
                   <p>Unavailable time</p>
