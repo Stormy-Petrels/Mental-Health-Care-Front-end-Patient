@@ -8,7 +8,7 @@ import Skeleton from '../components/SkeletonListDoctor.jsx';
 function Doctors() {
 
   const [doctors, setDoctors] = useState([]);
-  const [nameMajor, setNameMajor] = useState([]);
+  const [nameMajor, setNameMajor] = useState("Sociology");
   const [skeleton, setSkeleton] = useState(true);
 
   const handleChooseFilter = (nameMajor) => {
