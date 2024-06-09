@@ -94,7 +94,7 @@ const DoctorDetail = () => {
         <div className="bg-white shadow-lg rounded-lg p-6 mt-6">
           <div className="flex flex-col lg:flex-row gap-8">
             <figure>
-              <img src={baseURL + doctor.image} alt={doctor.image} className="w-[250px] h-[250px] object-cover"/>
+              <img src={baseURL + doctor.image} alt={doctor.image} className="w-[280px] h-[300px] object-cover"/>
             </figure>
             <div className="lg:w-1/2">
               <h2 className="text-2xl font-bold mb-4">{doctor.fullName}</h2>

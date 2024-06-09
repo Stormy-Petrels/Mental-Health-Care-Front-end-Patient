@@ -110,9 +110,9 @@ const Payment = () => {
         </div>
       <div style={{display: "flex", gap: "2px"}}>
         <div className="text-center">
-          <button type="submit" className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
+          {/* <button type="submit" className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
             Pay by Cash
-          </button>
+          </button> */}
         </div>
 
         <div className="text-center">
@@ -122,7 +122,7 @@ const Payment = () => {
         </div>
 
         <div className="text-end">
-          <button onClick={() => history.push('/')} className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">
+          <button onClick={() => history.push('/doctors')} className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">
             Back
           </button>
         </div>
