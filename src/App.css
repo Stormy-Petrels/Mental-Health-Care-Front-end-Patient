@@ -157,3 +157,11 @@ li > button:hover {
   border-radius: 12px;
   border: 2px solid #d0cfcf;
 }
+
+.card-hover-animation {
+  transition: transform 0.3s ease;
+}
+
+.card-hover-animation:hover {
+  transform: translateY(-5px);
+}

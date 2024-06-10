@@ -41,7 +41,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
     color: "#2D87F3",
     fontWeight: "540",
     "&:hover": {
-      backgroundColor: "#E3F2FF", // Keeping the same color on hover
+      backgroundColor: "#E3F2FF", 
     },
   });
 
@@ -50,7 +50,7 @@ const DoctorCard = ({ doctors, nameMajor }) => {
       {currentDataDoctors.map((doctor) => (
         <Link
           to="#"
-          className="group relative block overflow-hidden"
+          className="group relative block overflow-hidden card-hover-animation" 
           key={doctor.id}
           id="card"
         >
