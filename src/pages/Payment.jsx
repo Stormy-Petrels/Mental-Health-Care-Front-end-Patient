@@ -25,7 +25,7 @@ const Payment = () => {
         });
         localStorage.removeItem("informationOfBooking");
         toast.success("Booking successful!", { autoClose: 1500 });
-        history.push(`/doctor/${informationOfBooking.doctorId}`)
+        history.push(`/profile/${informationOfBooking.patientId}`)
         console.log(response);
       } catch (err) {
         console.error('Error booking time slot:', err);
