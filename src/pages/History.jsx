@@ -22,6 +22,7 @@ function History({ id }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('date');
   const baseURL = "http://127.0.0.1:8000/images/";
+
   useEffect(() => {
     axios
       .get(`http://127.0.0.1:8000/api/appointments/history/${id}`)
@@ -32,7 +33,7 @@ function History({ id }) {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [id]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -60,69 +61,83 @@ function History({ id }) {
 
   const AppointmentDetails = sortedAppointments
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    .map((appointment) => {
-      return (
-        <TableRow key={appointment.appointmentId}>
-          <TableCell align="left" style={{   paddingLeft: "20px", display: "flex", alignItems: "center" }}>
-            <Avatar alt={appointment.doctorName} src={`${baseURL}${appointment.image}`} />
-            <Typography style={{ paddingLeft: "10px"}}>
-              {appointment.doctorName}
+    .map((appointment) => (
+      <TableRow key={appointment.appointmentId}>
+        <TableCell align="left" style={{ paddingLeft: "20px", display: "flex", alignItems: "center" }}>
+          <Avatar alt={appointment.doctorName} src={`${baseURL}${appointment.image}`} />
+          <Typography style={{ paddingLeft: "10px" }}>
+            {appointment.doctorName}
+          </Typography>
+        </TableCell>
+        <TableCell align="left">{appointment.date}</TableCell>
+        <TableCell align="left">{`${appointment.timeStart} - ${appointment.timeEnd}`}</TableCell>
+        <TableCell align="left">{appointment.price}</TableCell>
+        <TableCell align="left">
+          {appointment.status === "1" ? (
+            <Typography style={{ color: 'green' }}>
+              Success
             </Typography>
-          </TableCell>
-          <TableCell align="left">{appointment.date}</TableCell>
-          <TableCell align="left">{`${appointment.timeStart} - ${appointment.timeEnd}`}</TableCell>
-          <TableCell align="left">{appointment.price}</TableCell>
-          <TableCell align="left">
-            {appointment.status === "1" ? (
-              <Typography style={{ color: 'green' }}>
-                Success
-              </Typography>
-            ) : (
-              <Typography style={{ color: 'blue' }}>
-                Processing...
-              </Typography>
-            )}
-          </TableCell>
-        </TableRow>
-      );
-    });
+          ) : (
+            <Typography style={{ color: 'blue' }}>
+              Processing...
+            </Typography>
+          )}
+        </TableCell>
+      </TableRow>
+    ));
 
   return (
     <div>
       <div className="flex justify-between">
         <Typography variant="h4" gutterBottom>
-          History appointment
+          History of Appointments
         </Typography>
       </div>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 600 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left" style={{ minWidth: 70 }}>
-                  DoctorName
-                </TableCell>
-                <TableCell align="left" style={{ minWidth: 50 }}>
-                  <TableSortLabel active={orderBy === 'date'} direction={order} onClick={() => handleRequestSort('date')} >
-                    Date booking
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="left" style={{ minWidth: 100 }}>
-                  Duration
-                </TableCell>
-                <TableCell align="left" style={{ minWidth: 100 }}>
-                  Price
-                </TableCell>
-                <TableCell align="left" style={{ minWidth: 100 }}>
-                  Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{AppointmentDetails}</TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination rowsPerPageOptions={[10, 25, 100]} component="div" count={appointments.length} rowsPerPage={rowsPerPage} page={page} onPageChange={handleChangePage} onRowsPerPageChange={handleChangeRowsPerPage} />
-      </Paper>
+      {appointments.length === 0 ? (
+        <Typography style={{
+          color: "red"
+        }} variant="h6" gutterBottom>
+          You don't have any appointments.
+        </Typography>
+      ) : (
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer sx={{ maxHeight: 600 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left" style={{ minWidth: 70 }}>
+                    Doctor Name
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: 50 }}>
+                    <TableSortLabel active={orderBy === 'date'} direction={order} onClick={() => handleRequestSort('date')} >
+                      Date of Booking
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: 100 }}>
+                    Duration
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: 100 }}>
+                    Price
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: 100 }}>
+                    Status
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{AppointmentDetails}</TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={appointments.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )}
     </div>
   );
 }

@@ -15,6 +15,8 @@ import {
 import ImageDefaultDoctor from '../assets/ImageDefaultDoctor.jpg';
 import axios from 'axios';
 import History from './History';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = () => {
     const { id } = useParams();
@@ -22,10 +24,13 @@ const Profile = () => {
     const [patient, setPatientData] = useState(null);
     const [editInfo, setEditInfo] = useState({
         fullName: '',
+        email: '',
         phone: '',
         address: '',
         password: '',
-        urlImage: null
+        urlImage: null,
+        healthCondition: '',
+        note: ''
     });
     const [isEditing, setIsEditing] = useState(false);
 
@@ -56,10 +61,13 @@ const Profile = () => {
         setIsEditing(false);
         setEditInfo({
             fullName: patient?.fullName || '',
+            email: patient?.email || '',
             phone: patient?.phone || '',
             address: patient?.address || '',
             password: patient?.password || '',
-            image: null
+            urlImage: null,
+            healthCondition: patient?.healthCondition || '',
+            note: patient?.note || ''
         });
     };
 
@@ -71,7 +79,14 @@ const Profile = () => {
             formData.append('password', editInfo.password);
             formData.append('phone', editInfo.phone);
             formData.append('address', editInfo.address);
-            formData.append('urlImage', editInfo.urlImage);
+            formData.append('healthCondition', editInfo.healthCondition || patient.healthCondition);
+            formData.append('note', editInfo.note || patient.note);
+
+            if (editInfo.urlImage) {
+                formData.append('urlImage', editInfo.urlImage);
+            } else if (patient.urlImage) {
+                formData.append('urlImage', patient.urlImage);
+            }
 
             const response = await axios.post(`http://127.0.0.1:8000/api/profile/${id}/edit`, formData, {
                 headers: {
@@ -80,10 +95,15 @@ const Profile = () => {
             });
 
             setPatientData(response.data.data);
-          
+            
+            toast.success("Update profile successfully!", { autoClose: 1500 });
             setIsEditing(false);
+            setTimeout(() => {
+                window.location.href = `/profile/${id}`;
+            }, 1500);
         } catch (error) {
             console.error('Error:', error);
+            toast.error("Failed to update profile, please try again.", { autoClose: 1500 });
         }
     };
 
@@ -106,7 +126,6 @@ const Profile = () => {
                 console.error('Error:', error);
             }
         };
-
         fetchData();
     }, [id]);
 
@@ -132,11 +151,11 @@ const Profile = () => {
                                         <Avatar
                                             src={patient?.image ? `http://127.0.0.1:8000/images/${patient.image}` : ImageDefaultDoctor}
                                             alt="User Avatar"
-                                            style={{ width: '80px', height: '80px', cursor: 'pointer' }}
+                                            style={{ width: '100px', height: '100px', cursor: 'pointer' }}
                                         />
                                         <Box sx={{ p: 3 }}>
-                                            <p>{patient?.fullName}</p>
-                                            <p>{patient?.email}</p>
+                                            <p style={{fontSize: "22px"}}>{patient?.fullName}</p>
+                                            <p style={{fontSize: "18px"}} >{patient?.email}</p>
                                         </Box>
                                     </Box>
                                     <Box component="hr" sx={{ borderColor: 'lightgray', m: 0 }} />
@@ -163,21 +182,21 @@ const Profile = () => {
                                                 </Button>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <TextField fullWidth label="Health Condition" variant="outlined" margin="normal" value={editInfo.healthCondition} disabled InputLabelProps={{ shrink: true, }} />
+                                                <TextField fullWidth label="Health Condition" name="healthCondition" onChange={handleInputChange} variant="outlined" margin="normal" value={editInfo.healthCondition} disabled InputLabelProps={{ shrink: true, }} />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <TextField fullWidth label="Note" variant="outlined" margin="normal" value={editInfo.note} disabled InputLabelProps={{ shrink: true, }} />
+                                                <TextField fullWidth label="Note" name="note" variant="outlined" onChange={handleInputChange} margin="normal" value={editInfo.note} disabled InputLabelProps={{ shrink: true, }} />
                                             </Grid>
 
                                             <Grid item xs={12}>
                                                 <Box textAlign="right" mt={3}>
                                                     {isEditing ? (
                                                         <>
-                                                            <Button variant="contained" color="info" sx={{ mr: 1 }} onClick={handleSaveChanges}>Save</Button>
+                                                            <Button variant="contained" style={{ backgroundColor: '#06B6D4', color: '#fff' }} sx={{ mr: 1 }} onClick={handleSaveChanges}>Save</Button>
                                                             <Button variant="outlined" color="error" onClick={handleCancel}>Cancel</Button>
                                                         </>
                                                     ) : (
-                                                        <Button variant="contained" color="info" onClick={handleEdit}>Edit</Button>
+                                                        <Button variant="contained" style={{ backgroundColor: '#06B6D4', color: '#fff' }} onClick={handleEdit}>Edit</Button>
                                                     )}
                                                 </Box>
                                             </Grid>
@@ -187,7 +206,7 @@ const Profile = () => {
                             )}
                             {activeTab === 1 && (
                                 <Box sx={{ p: 3 }}>
-                                    <History id={patient?.id}/>
+                                    <History id={patient?.id} />
                                 </Box>
                             )}
                         </Box>
@@ -199,3 +218,4 @@ const Profile = () => {
 }
 
 export default Profile;
+
