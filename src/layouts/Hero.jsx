@@ -64,8 +64,8 @@ function Hero() {
                     <p className="text-base py-6 max-w-lg">
                       {slide.description}
                     </p>
-                    <Button variant="contained">
-                      <Link to="/contact">CONTACT US</Link>
+                    <Button  style={{ backgroundColor: '#06B6D4', color: '#fff' }} >
+                      <Link   to="/contact">CONTACT US</Link>
                     </Button>
                   </div>
                 </div>
