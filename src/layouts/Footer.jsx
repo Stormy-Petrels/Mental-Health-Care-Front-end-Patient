@@ -3,7 +3,7 @@ import Logo from "../components/Logo";
 
 function Footer() {
   return (
-    <div>
+    <div className="container ">
       <div className=" mt-12 grid grid-cols-1 gap-1 lg:grid-cols-4 lg:gap-2">
         <div className="h-32 rounded-lg flex items-center justify-center">
           <div className="w-3/4 h-3/4 rounded-lg  flex flex-col  justify-center">
@@ -77,7 +77,14 @@ function Footer() {
                   Contact via email
                 </p>
               </li>
-              
+              <li>
+                <p
+             
+                  className="text-gray-700 transition hover:opacity-75"
+                >
+                  Contact via phone
+                </p>
+              </li>
             </ul>
           </div>
         </div>

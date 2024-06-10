@@ -102,7 +102,7 @@ const DoctorDetail = () => {
   const baseURL = "http://127.0.0.1:8000/images/";
 
   return (
-    <section className="py-8 px-4">
+    <section className="py-8 ">
       <div className="container mx-auto">
         <div className="bg-white shadow-lg rounded-lg p-6 mt-6">
           <button className="py-2">

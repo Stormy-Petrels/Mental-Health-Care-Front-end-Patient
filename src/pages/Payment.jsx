@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { formatDate } from 'date-fns';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const Payment = () => {
   const informationOfBooking = JSON.parse(localStorage.getItem("informationOfBooking"));
   const user = JSON.parse(localStorage.getItem("user"));
@@ -22,10 +24,12 @@ const Payment = () => {
           "status": "0",
         });
         localStorage.removeItem("informationOfBooking");
-        history.push(`/doctor/${informationOfBooking.doctorId}`);
+        toast.success("Booking successful!", { autoClose: 1500 });
+        history.push(`/doctor/${informationOfBooking.doctorId}`)
         console.log(response);
       } catch (err) {
         console.error('Error booking time slot:', err);
+        toast.error("Failed to book appointment, please try again.", { autoClose: 1500 });
       }
     }
   }

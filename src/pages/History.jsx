@@ -14,7 +14,7 @@ import {
   TableSortLabel,
   Avatar
 } from "@mui/material";
-
+import { format } from 'date-fns';
 function History({ id }) {
   const [appointments, setAppointments] = useState([]);
   const [page, setPage] = useState(0);
@@ -58,10 +58,18 @@ function History({ id }) {
     }
     return 0;
   });
+  const formatDate = (date) => {
+    return format(date, 'EEEE, MMMM dd, yyyy');
+  };
 
   const AppointmentDetails = sortedAppointments
-    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    .map((appointment) => (
+  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+  .map((appointment) => {
+    const formattedDate = formatDate(new Date(appointment.date));
+    let convertPrice = parseFloat(appointment.price);
+    let formatedPrice = convertPrice.toLocaleString('vi-VN');
+
+    return (
       <TableRow key={appointment.appointmentId}>
         <TableCell align="left" style={{ paddingLeft: "20px", display: "flex", alignItems: "center" }}>
           <Avatar alt={appointment.doctorName} src={`${baseURL}${appointment.image}`} />
@@ -69,9 +77,9 @@ function History({ id }) {
             {appointment.doctorName}
           </Typography>
         </TableCell>
-        <TableCell align="left">{appointment.date}</TableCell>
+        <TableCell align="left">{formattedDate}</TableCell> {/* Use formatted date here */}
         <TableCell align="left">{`${appointment.timeStart} - ${appointment.timeEnd}`}</TableCell>
-        <TableCell align="left">{appointment.price}</TableCell>
+        <TableCell align="left">{formatedPrice}VND</TableCell> 
         <TableCell align="left">
           {appointment.status === "1" ? (
             <Typography style={{ color: 'green' }}>
@@ -84,7 +92,8 @@ function History({ id }) {
           )}
         </TableCell>
       </TableRow>
-    ));
+    );
+  });
 
   return (
     <div>

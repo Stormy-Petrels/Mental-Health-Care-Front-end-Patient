@@ -78,11 +78,11 @@ function Navbar() {
   }, []);
 
   return (
-    <div>
-      <header
+    <div className="container mx-auto">
+      <header 
         className={`bg-white shadow-md ${
-          scrolled ? "shadow-gray-500" : "shadow-none"
-        } fixed w-full z-10 transition-all duration-300`}
+          scrolled ? "shadow-gray-60" : "shadow-none"
+        } fixed container z-10 transition-all duration-300`}
       >
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
