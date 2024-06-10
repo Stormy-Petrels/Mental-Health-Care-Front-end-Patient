@@ -3,6 +3,7 @@ import axios from "axios";
 import ButtonTime from "../components/ButtonTime";
 import { useHistory, useParams } from "react-router-dom";
 import SkeletonListDoctor from "../components/SkeletonListDoctor";
+import { Button } from "@mui/material";
 
 const DoctorDetail = () => {
   const { doctorId } = useParams();
@@ -92,6 +93,7 @@ const DoctorDetail = () => {
     <section className="py-8 px-4">
       <div className="container mx-auto">
         <div className="bg-white shadow-lg rounded-lg p-6 mt-6">
+         
           <div className="flex flex-col lg:flex-row gap-8">
             <figure>
               <img src={baseURL + doctor.image} alt={doctor.image} className="w-[280px] h-[300px] object-cover"/>

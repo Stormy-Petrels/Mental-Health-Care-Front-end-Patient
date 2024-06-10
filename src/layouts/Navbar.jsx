@@ -191,7 +191,7 @@ function Navbar() {
                   <Button
                     variant="contained"
                     style={{
-                      backgroundColor: "#2C74DF",
+                      backgroundColor: "#06B6D4",
                       textTransform: "none",
                       color: "white",
                       fontSize: "1em",
@@ -215,7 +215,7 @@ function Navbar() {
                   >
                     <Link
                       to="/signup"
-                      style={{ color: "inherit", textDecoration: "none" }}
+                      style={{ color: "#06B6D4", textDecoration: "none" }}
                     >
                       Sign up
                     </Link>

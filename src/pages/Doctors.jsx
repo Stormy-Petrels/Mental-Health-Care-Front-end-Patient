@@ -8,7 +8,7 @@ import Skeleton from '../components/SkeletonListDoctor.jsx';
 function Doctors() {
 
   const [doctors, setDoctors] = useState([]);
-  const [nameMajor, setNameMajor] = useState("Sociology");
+  const [nameMajor, setNameMajor] = useState("Psychologists");
   const [skeleton, setSkeleton] = useState(true);
 
   const handleChooseFilter = (nameMajor) => {
@@ -41,22 +41,6 @@ function Doctors() {
     <div className='childrenContainer'>
       {skeleton === true ? <Skeleton />  : <><Filter handleChooseFilter={handleChooseFilter}/>
       <DoctorCard doctors={doctors} nameMajor={nameMajor}/></>}
-      
-      
-      {/* {
-        doctors.map((doctor) => (
-          <div key={doctor.id}>
-            <p>
-              <span className="font-bold text-black">{doctor.fullName}</span>
-              <span className="font-bold text-black"> {doctor.major}</span>
-            </p>
-          </div>
-        ))
-       
-      } */}
-
-      
-
     </div>
   )
 }
