@@ -38,7 +38,7 @@ function Doctors() {
   }, [])
 
   return (
-    <div className='childrenContainer'>
+    <div className='childrenContainer mb-24'>
       {skeleton === true ? <Skeleton />  : <><Filter handleChooseFilter={handleChooseFilter}/>
       <DoctorCard doctors={doctors} nameMajor={nameMajor}/></>}
     </div>

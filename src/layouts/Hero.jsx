@@ -46,7 +46,7 @@ function Hero() {
     <div>
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="w-full">
+          <div key={index} className="">
             <section className="bg-cover bg-center bg-no-repeat w-full" style={{ backgroundImage: `url(${slide.image})` }}>
               <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:flex lg:w-screen lg:h-[75vh] lg:items-center lg:px-8">
                 <div className="flex flex-col gap-5">
