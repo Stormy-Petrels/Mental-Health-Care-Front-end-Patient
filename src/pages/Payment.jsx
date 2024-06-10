@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import { formatDate } from 'date-fns';
 const Payment = () => {
   const informationOfBooking = JSON.parse(localStorage.getItem("informationOfBooking"));
   const user = JSON.parse(localStorage.getItem("user"));
   const baseURL = "http://127.0.0.1:8000/images/";
   const history = useHistory();
+  
   let convert = parseFloat(informationOfBooking.price);
   let coverPrice = convert.toLocaleString('vi-VN');
   console.log(coverPrice);
@@ -28,6 +29,7 @@ const Payment = () => {
       }
     }
   }
+  const formattedDate = formatDate(new Date(informationOfBooking.date), "EEEE, MMMM dd, yyyy");
 
   const payVnpay = async (event) => {
     event.preventDefault();
@@ -48,14 +50,14 @@ const Payment = () => {
     <div className="pt-10 pb-20 ">
        <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
       <div className="text-center mb-6">
-        <img src={`${baseURL}${informationOfBooking.doctorImage}`} alt="Doctor" className="mx-auto mb-4 w-[250px] h-[250px] object-cover"/>
+        <img src={`${baseURL}${informationOfBooking.doctorImage}`} alt="Doctor" className="mx-auto mb-4 w-[220px] h-[220px] rounded-xl object-cover"/>
         <h1 className="text-2xl font-bold">{informationOfBooking.doctorName}</h1>
-        <p>{informationOfBooking.timeStart} - {informationOfBooking.timeEnd} - {informationOfBooking.date}</p>
+        <p className='text-xl'>{informationOfBooking.timeStart} - {informationOfBooking.timeEnd} - {formattedDate}</p>
       </div>
 
       <div className="border p-4 mb-6">
         <span className="text-lg font-semibold">Price:</span>
-        <span className="text-lg font-semibold text-orange-500">{coverPrice}₫</span>
+        <span className="text-lg font-semibold text-orange-500">{coverPrice} VND</span>
       </div>
 
       <form onSubmit={getBooking}>
@@ -82,7 +84,7 @@ const Payment = () => {
         <div className="border-t pt-4 mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="text-lg font-semibold">Price:</span>
-            <span className="text-lg font-semibold text-orange-500">{coverPrice}₫</span>
+            <span className="text-lg font-semibold text-orange-500">{coverPrice} VND</span>
           </div>
           <div className="flex justify-between items-center mb-2">
             <span className="text-lg font-semibold">Price to book:</span>
@@ -90,7 +92,7 @@ const Payment = () => {
           </div>
           <div className="flex justify-between items-center">
             <span className="text-lg font-semibold">Total Price:</span>
-            <span className="text-lg font-semibold text-orange-500">{coverPrice}₫</span>
+            <span className="text-lg font-semibold text-orange-500">{coverPrice} VND</span>
           </div>
         </div>
 
@@ -104,7 +106,7 @@ const Payment = () => {
               <button 
                   onClick={payVnpay} 
                   style={{
-                      backgroundColor: "#FFEB3B",
+                      backgroundColor: "#FF5A00",
                       color: "white",
                       fontWeight: "bold",
                       padding: "10px 20px",
@@ -113,8 +115,8 @@ const Payment = () => {
                       transition: "background-color 0.3s",
                       border: "1px solid",
                   }}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = "#FDD835"}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = "#FFEB3B"}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = "#FF5A00"}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = "#FDA321"}
               >
                   Pay by VNPAY
               </button>
@@ -123,17 +125,17 @@ const Payment = () => {
               <button 
                   onClick={() => history.push('/doctors')} 
                   style={{
-                      backgroundColor: "white",
-                      color: "black",
+                      backgroundColor: "#8C8C8C",
+                      color: "white",
                       fontWeight: "bold",
                       padding: "10px 20px",
                       borderRadius: "5px",
                       width: "100%",
                       transition: "background-color 0.3s",
-                      outline: "1px solid red",
+                      
                   }}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = "red"}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = "white"}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = "#8C8C8C"}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = "#8C8C8C"}
               >
                   Cancel
               </button>

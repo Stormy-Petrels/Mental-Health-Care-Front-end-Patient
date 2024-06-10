@@ -64,7 +64,7 @@ function Navbar() {
               },
             }
           );
-
+         
           const userData = response.data.data; 
           setIsLoggedIn(true);
           setUser(userData);
