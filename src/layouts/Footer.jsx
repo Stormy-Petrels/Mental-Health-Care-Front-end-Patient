@@ -21,7 +21,7 @@ function Footer() {
         <div className="h-32 rounded-lg flex items-center">
           <div className="w-3/4 h-3/4 rounded-lg flex flex-col  justify-center">
             <div className="md:flex md:items-center text-left">
-              <p className="text-xl font-bold leading-6 text-cyan-500">
+              <p className="text-xl  leading-6 text-cyan-500">
                 Services
               </p>
             </div>
@@ -48,7 +48,7 @@ function Footer() {
         <div className="h-32 rounded-lg flex items-center">
           <div className="w-3/4 h-3/4 rounded-lg flex flex-col  justify-center">
             <div className="md:flex md:items-center text-left">
-              <p className="text-xl font-bold leading-6 text-cyan-500">
+              <p className="text-xl  leading-6 text-cyan-500">
                 Helpful Links
               </p>
             </div>
@@ -73,7 +73,7 @@ function Footer() {
         <div className="h-32 rounded-lg flex items-center">
           <div className="w-3/4 h-3/4 rounded-lg flex flex-col  justify-center">
             <div className="md:flex md:items-center text-left">
-              <p className="text-xl font-bold leading-6 text-cyan-500">
+              <p className="text-xl  leading-6 text-cyan-500">
                 Hospital
               </p>
             </div>

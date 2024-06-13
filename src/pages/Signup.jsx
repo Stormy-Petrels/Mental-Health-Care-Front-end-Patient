@@ -122,19 +122,6 @@ export default function Signup() {
                                     margin="normal"
                                     required
                                     fullWidth
-                                    id="fullName"
-                                    label="Full Name"
-                                    name="fullName"
-                                    autoComplete="name"
-                                    value={fullName}
-                                    onChange={(e) => setFullName(e.target.value)}
-                                    error={!!fullNameError}
-                                    helperText={fullNameError}
-                                />
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
                                     name="password"
                                     label="Password"
                                     type={showPassword ? "text" : "password"}
@@ -159,6 +146,20 @@ export default function Signup() {
                                         ),
                                     }}
                                 />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="fullName"
+                                    label="Full Name"
+                                    name="fullName"
+                                    autoComplete="name"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    error={!!fullNameError}
+                                    helperText={fullNameError}
+                                />
+                                
                                 <TextField
                                     margin="normal"
                                     required
