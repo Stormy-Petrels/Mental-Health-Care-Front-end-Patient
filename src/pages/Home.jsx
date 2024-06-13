@@ -3,7 +3,9 @@ import Hero from "../layouts/Hero";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
 function Home() {
   const staffCardsData = [
     {
@@ -32,7 +34,7 @@ function Home() {
       </div>
     </div>
   );
-  /* eslint-enable no-restricted-globals */
+  const history = useHistory();
   useEffect(() => {
     const checkTransactionStatus = async () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -60,8 +62,12 @@ function Home() {
   
         console.log(responseStore);
         localStorage.removeItem("informationOfBooking");
+        toast.success("Booking successful!", { autoClose: 1500 });
+        history.push(`/profile/${informationOfBooking.patientId}`)
+       
       } else {
         localStorage.removeItem("informationOfBooking");
+        toast.error("Transaction was not successful!", { autoClose: 1500 });
         console.error('Transaction was not successful.');
       }
     };

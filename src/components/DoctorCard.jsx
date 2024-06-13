@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ReactPaginate from 'react-paginate';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import * as React from "react";
+import Button from "@mui/material/Button";
+import ReactPaginate from "react-paginate";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { styled } from "@mui/system";
 const DoctorCard = ({ doctors, nameMajor }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [newDataDoctors, setNewDataDoctors] = useState([]);
@@ -31,14 +31,28 @@ const DoctorCard = ({ doctors, nameMajor }) => {
     setCurrentPage(event.selected);
   };
 
+  const CustomButton = styled(Button)({
+    backgroundColor: "#E3F2FF",
+    borderRadius: "26px",
+    fontSize: "18px",
+    textTransform: "none",
+    padding: "6px 1px",
+    border: "1px solid #2D87F3",
+    color: "#2D87F3",
+    fontWeight: "540",
+    "&:hover": {
+      backgroundColor: "#E3F2FF", 
+    },
+  });
+
   return (
     <div className="listDoctors">
       {currentDataDoctors.map((doctor) => (
         <Link
           to="#"
-          className="group relative block overflow-hidden"
+          className="group relative block overflow-hidden card-hover-animation" 
           key={doctor.id}
-          id='card'
+          id="card"
         >
           <button className="absolute end-4 top-4 z-0 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
             <span className="sr-only">Wishlist</span>
@@ -66,20 +80,37 @@ const DoctorCard = ({ doctors, nameMajor }) => {
           />
 
           <div className="relative border border-gray-100 bg-white p-6">
-            <span className="whitespace-nowrap bg-gray-400 px-3 py-1.5 text-xs font-medium">
-              {" "}
-              {doctor.major}{" "}
-            </span>
+            <p>
+              <p
+                style={{
+                  color: "#595959",
+                  fontWeight: "400",
+                  fontSize:"14px",
+                  fontFamily: "Audiowide, Sans-serif",
+                }}
+              >
+                {doctor.major}
+              </p>
+            </p>
 
-            <h3 className="mt-4 text-lg font-medium">
-              <p style={{color:"#166CD0", fontWeight: "bold", fontFamily:"Audiowide, Sans-serif"}}>{doctor.fullName}</p>
+            <h3>
+              <p
+                style={{
+                  color: "black",
+                  fontWeight: "600",
+                  fontSize:"22px",
+                  fontFamily: "Audiowide, Sans-serif",
+                }}
+              >
+                {doctor.fullName}
+              </p>
             </h3>
 
             <Link to={"/doctor/" + doctor.id}>
-              <form className="mt-4">
-                <Button variant="contained" size="large" fullWidth="true" style={{backgroundColor: "#E3F2FF"}}>
-                  <p style={{color:"#1b3250", fontWeight: "bold"}}>Book</p>
-                </Button>
+              <form className="mt-2">
+                <CustomButton variant="contained" fullWidth>
+                  Make an appointment
+                </CustomButton>
               </form>
             </Link>
           </div>

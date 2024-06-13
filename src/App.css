@@ -47,7 +47,7 @@ body {
   column-gap: 10px;
   justify-content: center;
   align-items: center;
-  padding-top:5%;
+  padding-top:8%;
 }
 
 .item {
@@ -117,14 +117,10 @@ body {
 .filter {
   height: 60vh !important;
   width: 15vw;
-  /* border: 2px solid black !important; */
-  /* border-radius: 5px; */
-  /* background-color: #0099ff; */
-  /* box-shadow: 5px 5px #999; */
   padding-right: 10px !important;
   margin: 0 20px !important;
   padding: 5px;
-  padding-top:5%;
+  padding-top:8%;
 }
 
 li > button:hover {
@@ -156,4 +152,12 @@ li > button:hover {
 #card {
   border-radius: 12px;
   border: 2px solid #d0cfcf;
+}
+
+.card-hover-animation {
+  transition: transform 0.3s ease;
+}
+
+.card-hover-animation:hover {
+  transform: translateY(-5px);
 }

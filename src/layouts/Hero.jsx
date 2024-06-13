@@ -4,10 +4,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import slider1 from "../assets/slider1.png";
-import slider2 from "../assets/slider2.png";
-import slider3 from "../assets/slider3.png";
-import slider4 from "../assets/slider4.png";
+import slider1 from "../assets/slider1.jpg";
+import slider2 from "../assets/slider2.jpg";
+import slider3 from "../assets/slider3.jpg";
+import slider4 from "../assets/slider4.jpg";
 
 function Hero() {
   const slides = [
@@ -46,7 +46,7 @@ function Hero() {
     <div>
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="w-full">
+          <div key={index} className="">
             <section className="bg-cover bg-center bg-no-repeat w-full" style={{ backgroundImage: `url(${slide.image})` }}>
               <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:flex lg:w-screen lg:h-[75vh] lg:items-center lg:px-8">
                 <div className="flex flex-col gap-5">
@@ -64,8 +64,8 @@ function Hero() {
                     <p className="text-base py-6 max-w-lg">
                       {slide.description}
                     </p>
-                    <Button variant="contained">
-                      <Link to="/contact">CONTACT US</Link>
+                    <Button  style={{ backgroundColor: '#06B6D4', color: '#fff' }} >
+                      <Link   to="/contact">CONTACT US</Link>
                     </Button>
                   </div>
                 </div>
